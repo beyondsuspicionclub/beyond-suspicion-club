@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond Suspicion Club</title>
+<meta name="description" content="Uma associação para os curiosos. Mistérios para imprimir e resolver em grupo. Caso 01: O Relojoeiro, Londres 1891. Em breve.">
+<meta property="og:title" content="Beyond Suspicion Club">
+<meta property="og:description" content="Mistérios para imprimir e resolver em grupo. Caso 01 em breve.">
+<link rel="icon" href="selo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141412;--bg2:#1d1d1a;--gold:#c9a96a;--gold-hi:#ecd79b;--cream:#efe6d4;--mute:#a79c86}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--cream)}
+body{font-family:'Old Standard TT',Georgia,serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+ background:radial-gradient(ellipse at 50% 20%,var(--bg2),var(--bg) 70%);padding:0 16px}
+.lang{align-self:flex-end;margin-top:14px;font-family:'IM Fell English',serif;font-size:15px;letter-spacing:2px}
+.lang button{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit;letter-spacing:inherit;padding:6px 8px}
+.lang button[aria-pressed=true]{color:var(--gold-hi);border-bottom:1px solid var(--gold)}
+main{width:100%;max-width:560px;text-align:center;padding:28px 0 40px}
+.seal{width:min(62vw,260px);border-radius:50%;box-shadow:0 10px 40px #000a,0 0 0 1px #c9a96a33}
+.est{margin:26px 0 6px;color:var(--gold);font-family:'IM Fell English',serif;letter-spacing:6px;font-size:14px}
+h1{margin:0;font-size:clamp(28px,8vw,40px);letter-spacing:3px;text-transform:uppercase}
+.club{margin:6px 0 0;color:var(--gold);letter-spacing:14px;font-size:18px;padding-left:14px}
+hr{border:0;border-top:1px solid var(--gold);opacity:.6;margin:26px auto;width:80%}
+.tag{font-size:18px;text-transform:uppercase;letter-spacing:2px;margin:0 0 6px}
+.sub{color:var(--mute);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin:0}
+.case{margin:34px auto 0;padding:22px 20px;border:1px solid #c9a96a55;max-width:460px;background:#0000003a}
+.case small{display:block;color:var(--gold);font-family:'IM Fell English',serif;letter-spacing:5px;font-size:13px;margin-bottom:8px}
+.case h2{margin:0 0 8px;font-size:24px}
+.case p{margin:0;color:var(--mute);line-height:1.55;font-size:15px}
+.soon{display:inline-block;margin-top:14px;padding:4px 12px;border:1px solid var(--gold);color:var(--gold-hi);font-size:12px;letter-spacing:4px;text-transform:uppercase}
+.cta{display:inline-block;margin-top:34px;padding:15px 30px;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 55%,#8a6c36);color:#1a1408;
+ text-decoration:none;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:14px}
+.cta:hover{filter:brightness(1.08)}
+.note{color:var(--mute);font-size:12px;margin:14px auto 0;max-width:380px;line-height:1.5}
+footer{margin-top:auto;padding:18px 0 26px;color:var(--mute);font-size:13px;letter-spacing:1px}
+footer a{color:var(--gold);text-decoration:none}
+[data-l=en]{display:none}
+html[data-lang=en] [data-l=pt]{display:none}
+html[data-lang=en] [data-l=en]{display:revert}
+</style>
+</head>
+<body>
+<div class="lang" role="group" aria-label="Idioma / Language">
+  <button type="button" data-set="pt" aria-pressed="true">PT</button><button type="button" data-set="en" aria-pressed="false">EN</button>
+</div>
+<main>
+  <img class="seal" src="selo.jpg" alt="Selo do Beyond Suspicion Club: monograma BSC em ouro sobre fundo preto">
+  <p class="est">✦ &nbsp;MYSTERY CASE FILES&nbsp; ✦</p>
+  <h1>Beyond Suspicion</h1>
+  <p class="club">CLUB</p>
+  <hr>
+  <p class="tag"><span data-l="pt">Uma associação para os curiosos</span><span data-l="en">An association for the curious</span></p>
+  <p class="sub"><span data-l="pt">Mistérios para imprimir e resolver em grupo</span><span data-l="en">Printable mysteries to solve together</span></p>
+
+  <section class="case">
+    <small><span data-l="pt">CASO 01</span><span data-l="en">CASE 01</span></small>
+    <h2><span data-l="pt">O Relojoeiro</span><span data-l="en">The Watchmaker</span></h2>
+    <p><span data-l="pt">Londres, 1891. Um relojoeiro morto numa oficina trancada por dentro, e algumas peças que não deveriam existir. Um caso difícil, feito para resolver à mesa com amigos.</span>
+       <span data-l="en">London, 1891. A watchmaker dead in a workshop bolted from the inside, and a few objects that should not exist. A hard case, made to be solved around a table.</span></p>
+    <span class="soon"><span data-l="pt">Em breve</span><span data-l="en">Coming soon</span></span>
+  </section>
+
+  <a class="cta" id="cta" href="#"><span data-l="pt">Entrar na lista de espera</span><span data-l="en">Join the waitlist</span></a>
+  <p class="note"><span data-l="pt">Avisamos por e-mail quando o primeiro caso sair. Nada de spam; se quiser sair da lista, é só pedir.</span>
+     <span data-l="en">We will email you when the first case is out. No spam; just ask if you want off the list.</span></p>
+</main>
+<footer>
+  <a id="ig" href="#">Instagram</a> &nbsp;·&nbsp; © Beyond Suspicion Club
+</footer>
+<script>
+/* >>> EDITE AQUI <<< */
+var FORM_URL = "COLE_AQUI_O_LINK_DO_GOOGLE_FORMS";
+var INSTAGRAM_URL = "https://www.instagram.com/COLE_AQUI_O_USUARIO/";
+/* >>>>>>>>>>>>>>>>>> */
+document.getElementById('cta').href = FORM_URL;
+document.getElementById('ig').href = INSTAGRAM_URL;
+function setLang(l){
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.lang = l === 'en' ? 'en' : 'pt-BR';
+  document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.set === l); });
+  try{ localStorage.setItem('bsc-lang', l); }catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.set); }); });
+var saved = null; try{ saved = localStorage.getItem('bsc-lang'); }catch(e){}
+setLang(saved || ((navigator.language||'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en'));
+</script>
+</body>
+</html>
