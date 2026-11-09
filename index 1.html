@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond Suspicion Club</title>
+<meta name="description" content="Uma associação para os curiosos. Mistérios para imprimir e resolver em grupo. Caso 01: O Relojoeiro, Londres 1891. Em breve.">
+<meta property="og:title" content="Beyond Suspicion Club">
+<meta property="og:description" content="Mistérios para imprimir e resolver em grupo. Caso 01 em breve.">
+<link rel="icon" href="selo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141412;--bg2:#1d1d1a;--gold:#c9a96a;--gold-hi:#ecd79b;--cream:#efe6d4;--mute:#a79c86}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--cream)}
+body{font-family:'Old Standard TT',Georgia,serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+ background:radial-gradient(ellipse at 50% 20%,var(--bg2),var(--bg) 70%);padding:0 16px}
+.lang{align-self:flex-end;margin-top:14px;font-family:'IM Fell English',serif;font-size:15px;letter-spacing:2px}
+.lang button{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit;letter-spacing:inherit;padding:6px 8px}
+.lang button[aria-pressed=true]{color:var(--gold-hi);border-bottom:1px solid var(--gold)}
+main{width:100%;max-width:560px;text-align:center;padding:28px 0 40px}
+.seal{width:min(62vw,260px);border-radius:50%;box-shadow:0 10px 40px #000a,0 0 0 1px #c9a96a33}
+.est{margin:26px 0 6px;color:var(--gold);font-family:'IM Fell English',serif;letter-spacing:6px;font-size:14px}
+h1{margin:0;font-size:clamp(28px,8vw,40px);letter-spacing:3px;text-transform:uppercase}
+.club{margin:6px 0 0;color:var(--gold);letter-spacing:14px;font-size:18px;padding-left:14px}
+hr{border:0;border-top:1px solid var(--gold);opacity:.6;margin:26px auto;width:80%}
+.tag{font-size:18px;text-transform:uppercase;letter-spacing:2px;margin:0 0 6px}
+.sub{color:var(--mute);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin:0}
+.case{margin:34px auto 0;padding:22px 20px;border:1px solid #c9a96a55;max-width:460px;background:#0000003a}
+.case small{display:block;color:var(--gold);font-family:'IM Fell English',serif;letter-spacing:5px;font-size:13px;margin-bottom:8px}
+.case h2{margin:0 0 8px;font-size:24px}
+.case p{margin:0;color:var(--mute);line-height:1.55;font-size:15px}
+.soon{display:inline-block;margin-top:14px;padding:4px 12px;border:1px solid var(--gold);color:var(--gold-hi);font-size:12px;letter-spacing:4px;text-transform:uppercase}
+.cta{display:inline-block;margin-top:34px;padding:15px 30px;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 55%,#8a6c36);color:#1a1408;
+ text-decoration:none;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:14px}
+.cta:hover{filter:brightness(1.08)}
+.note{color:var(--mute);font-size:12px;margin:14px auto 0;max-width:380px;line-height:1.5}
+
+form{margin:34px auto 0;max-width:460px;text-align:left;border:1px solid #c9a96a55;padding:24px 20px;background:#0000003a}
+form h3{margin:0 0 4px;text-align:center;font-size:20px;letter-spacing:2px;text-transform:uppercase}
+form .hint{margin:0 0 18px;text-align:center;color:var(--mute);font-size:13px}
+label,.lbl{display:block;margin:14px 0 6px;color:var(--gold);font-family:'IM FELL English',serif;font-size:16px;letter-spacing:1px}
+input[type=text],input[type=email],select,textarea{width:100%;background:#0e0e0d;color:var(--cream);border:1px solid #c9a96a77;padding:12px;font:inherit;font-size:16px;border-radius:0}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+textarea{min-height:74px;resize:vertical}
+.opts label{display:flex;gap:10px;align-items:center;margin:6px 0;color:var(--cream);font-family:'Old Standard TT',serif;font-size:15px;letter-spacing:0}
+.opts input{accent-color:#c9a96a;width:18px;height:18px}
+.hp{position:absolute;left:-9999px;opacity:0}
+button.cta{border:0;cursor:pointer;width:100%;margin-top:22px;font-family:inherit}
+button.cta[disabled]{opacity:.6;cursor:wait}
+#msg{margin:14px 0 0;text-align:center;font-size:15px;min-height:20px}
+#msg.ok{color:var(--gold-hi)} #msg.err{color:#e6a09a}
+footer{margin-top:auto;padding:18px 0 26px;color:var(--mute);font-size:13px;letter-spacing:1px}
+footer a{color:var(--gold);text-decoration:none}
+[data-l=en]{display:none}
+html[data-lang=en] [data-l=pt]{display:none}
+html[data-lang=en] [data-l=en]{display:revert}
+</style>
+</head>
+<body>
+<div class="lang" role="group" aria-label="Idioma / Language">
+  <button type="button" data-set="pt" aria-pressed="true">PT</button><button type="button" data-set="en" aria-pressed="false">EN</button>
+</div>
+<main>
+  <img class="seal" src="selo.jpg" alt="Selo do Beyond Suspicion Club: monograma BSC em ouro sobre fundo preto">
+  <p class="est">✦ &nbsp;MYSTERY CASE FILES&nbsp; ✦</p>
+  <h1>Beyond Suspicion</h1>
+  <p class="club">CLUB</p>
+  <hr>
+  <p class="tag"><span data-l="pt">Uma associação para os curiosos</span><span data-l="en">An association for the curious</span></p>
+  <p class="sub"><span data-l="pt">Mistérios para imprimir e resolver em grupo</span><span data-l="en">Printable mysteries to solve together</span></p>
+
+  <section class="case">
+    <small><span data-l="pt">CASO 01</span><span data-l="en">CASE 01</span></small>
+    <h2><span data-l="pt">O Relojoeiro</span><span data-l="en">The Watchmaker</span></h2>
+    <p><span data-l="pt">Londres, 1891. Um relojoeiro morto numa oficina trancada por dentro, e algumas peças que não deveriam existir. Um caso difícil, feito para resolver à mesa com amigos.</span>
+       <span data-l="en">London, 1891. A watchmaker dead in a workshop bolted from the inside, and a few objects that should not exist. A hard case, made to be solved around a table.</span></p>
+    <span class="soon"><span data-l="pt">Em breve</span><span data-l="en">Coming soon</span></span>
+  </section>
+
+  <form id="wl" novalidate>
+    <h3 data-pt="Lista de espera" data-en="Waitlist"></h3>
+    <p class="hint" data-pt="Avisamos por e-mail quando o primeiro caso sair." data-en="We will email you when the first case is out."></p>
+    <label for="nome" data-pt="Nome" data-en="Name"></label>
+    <input type="text" id="nome" name="nome" required autocomplete="name">
+    <label for="email" data-pt="E-mail" data-en="Email"></label>
+    <input type="email" id="email" name="email" required autocomplete="email">
+    <span class="lbl" data-pt="Como você prefere jogar?" data-en="How would you like to play?"></span>
+    <select name="formato">
+      <option value="" data-pt="Escolha uma opção" data-en="Choose one"></option>
+      <option value="Digital" data-pt="Versão digital, para imprimir em casa" data-en="Digital, printed at home"></option>
+      <option value="Fisica" data-pt="Versão física, caixa pronta" data-en="Physical, ready-made box"></option>
+      <option value="As duas" data-pt="Tanto faz / as duas" data-en="Either / both"></option>
+    </select>
+    <span class="lbl" data-pt="Com quem você costuma jogar?" data-en="Who do you usually play with?"></span>
+    <div class="opts">
+      <label><input type="checkbox" name="com_quem" value="Amigos"><span data-pt="Amigos" data-en="Friends"></span></label>
+      <label><input type="checkbox" name="com_quem" value="Casal"><span data-pt="Casal" data-en="Partner"></span></label>
+      <label><input type="checkbox" name="com_quem" value="Familia"><span data-pt="Família" data-en="Family"></span></label>
+      <label><input type="checkbox" name="com_quem" value="Sozinho"><span data-pt="Sozinho(a)" data-en="Solo"></span></label>
+    </div>
+    <span class="lbl" data-pt="Quanto pagaria por um caso digital?" data-en="What would you pay for a digital case?"></span>
+    <select name="preco_digital">
+      <option value="" data-pt="Escolha uma opção" data-en="Choose one"></option>
+      <option value="ate 20" data-pt="Até R$ 20" data-en="Up to R$ 20"></option>
+      <option value="20-40" data-pt="R$ 20 a 40" data-en="R$ 20 to 40"></option>
+      <option value="40-60" data-pt="R$ 40 a 60" data-en="R$ 40 to 60"></option>
+      <option value="60+" data-pt="Mais de R$ 60" data-en="More than R$ 60"></option>
+    </select>
+    <span class="lbl" data-pt="Quanto pagaria por um caso em caixa física?" data-en="What would you pay for a physical boxed case?"></span>
+    <select name="preco_fisico">
+      <option value="" data-pt="Escolha uma opção" data-en="Choose one"></option>
+      <option value="ate 80" data-pt="Até R$ 80" data-en="Up to R$ 80"></option>
+      <option value="80-120" data-pt="R$ 80 a 120" data-en="R$ 80 to 120"></option>
+      <option value="120-160" data-pt="R$ 120 a 160" data-en="R$ 120 to 160"></option>
+      <option value="160+" data-pt="Mais de R$ 160" data-en="More than R$ 160"></option>
+    </select>
+    <label for="tema" data-pt="Algum tema ou época que gostaria de ver? (opcional)" data-en="Any theme or era you would like to see? (optional)"></label>
+    <textarea id="tema" name="tema"></textarea>
+    <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input type="hidden" name="idioma" id="idioma" value="pt">
+    <button class="cta" type="submit" id="send" data-pt="Entrar na lista de espera" data-en="Join the waitlist"></button>
+    <p id="msg" role="status" aria-live="polite"></p>
+    <p class="note" data-pt="Usamos seu e-mail só para avisar do lançamento. Para sair da lista, é só pedir." data-en="We only use your email to announce the launch. Just ask if you want off the list."></p>
+  </form>
+</main>
+<footer>
+  <a id="ig" href="#">Instagram</a> &nbsp;·&nbsp; © Beyond Suspicion Club
+</footer>
+<script>
+/* >>> EDITE AQUI (depois de publicar o Apps Script) <<< */
+var SCRIPT_URL = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+var INSTAGRAM_URL = "https://www.instagram.com/beyondsuspicionclub/";
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+document.getElementById('ig').href = INSTAGRAM_URL;
+var LANG='pt';
+var T={pt:{need:'Preencha nome e e-mail válidos.',ok:'Inscrição recebida. Bem-vindo(a) ao clube. Até lá, desconfie de todos.',err:'Não foi possível enviar agora. Tente de novo em instantes.',busy:'Enviando…'},
+       en:{need:'Please enter a valid name and email.',ok:'You are on the list. Welcome to the club. Until then, trust no one.',err:'Could not send right now. Please try again shortly.',busy:'Sending…'}};
+function setLang(l){
+  LANG=l;
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.lang = l === 'en' ? 'en' : 'pt-BR';
+  document.querySelectorAll('[data-pt]').forEach(function(el){ el.textContent = el.getAttribute('data-'+l); });
+  document.getElementById('idioma').value = l;
+  document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.set === l); });
+  try{ localStorage.setItem('bsc-lang', l); }catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.set); }); });
+var saved = null; try{ saved = localStorage.getItem('bsc-lang'); }catch(e){}
+setLang(saved || ((navigator.language||'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en'));
+
+var form=document.getElementById('wl'), msg=document.getElementById('msg'), btn=document.getElementById('send');
+form.addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var nome=form.nome.value.trim(), email=form.email.value.trim();
+  msg.className=''; 
+  if(!nome || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.className='err'; msg.textContent=T[LANG].need; return; }
+  if(form.site.value){ msg.className='ok'; msg.textContent=T[LANG].ok; return; } /* isca anti-robô */
+  if(SCRIPT_URL.indexOf('COLE_AQUI')===0){ msg.className='err'; msg.textContent='(Configuração pendente: falta colar a URL do Apps Script.)'; return; }
+  btn.disabled=true; msg.textContent=T[LANG].busy;
+  var data=new URLSearchParams();
+  new FormData(form).forEach(function(v,k){ if(k!=='site') data.append(k,v); });
+  fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:data})
+    .then(function(){ msg.className='ok'; msg.textContent=T[LANG].ok; form.reset(); document.getElementById('idioma').value=LANG; })
+    .catch(function(){ msg.className='err'; msg.textContent=T[LANG].err; })
+    .then(function(){ btn.disabled=false; });
+});
+</script>
+</body>
+</html>
