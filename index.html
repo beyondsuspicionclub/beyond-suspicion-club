@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Inter:wght@500&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0805;--bg2:#15100a;--gold:#c4a25a;--gold-hi:#e6cf98;--gold-lo:#9c7d3f;--ivory:#efe3c8;--mute:#a89878;--line:rgba(214,184,115,.28);--paper:#ecdcb6;--ink:#2a2014}
+:root{--bg:#0b0805;--bg2:#15100a;--gold:#c4a25a;--gold-hi:#e6cf98;--gold-lo:#9c7d3f;--ivory:#efe3c8;--mute:#a89878;--line:rgba(214,184,115,.28)}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ivory)}
 body{font-family:'Old Standard TT',Georgia,serif;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -21,43 +21,68 @@ header img{width:64px;height:64px}
 .eyebrow{font:500 12px Inter,sans-serif;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-top:10px}
 h1{font-weight:400;font-size:clamp(34px,7vw,52px);margin:8px 0 0;line-height:1.05}
 .intro{color:#d8cbb0;max-width:34em;margin:14px auto 0;text-align:center}
+.tgleg{font-size:14px;color:var(--mute);margin:10px 2px 0;font-style:italic;text-align:center}
 .step{margin-top:28px;border:1px solid var(--line);padding:22px 20px;background:linear-gradient(180deg,var(--bg2),#100b07)}
 .step.locked{display:none}
 .step.rev{animation:rv .8s ease both}
 @keyframes rv{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.step.rev{animation:none}}
 .step h2{margin:0;font-weight:400;font-size:26px;display:flex;gap:12px;align-items:baseline}
-.step h2 .n{color:var(--gold);font-size:20px}
+.step h2 .n{color:var(--gold);font-size:24px}
 .step p.d{color:var(--mute);margin:8px 0 14px;font-size:16px}
-.step .lk{font:500 12px Inter,sans-serif;letter-spacing:.2em;color:var(--mute);margin-top:12px;text-transform:uppercase}
 label{display:block;font:500 12px Inter,sans-serif;letter-spacing:.18em;color:var(--mute);text-transform:uppercase;margin:12px 0 6px}
-input[type=text],input[type=number],select{width:100%;padding:12px 14px;background:#0e0a06;border:1px solid var(--line);color:var(--ivory);font:inherit;font-size:18px;border-radius:0}
-.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.nums input{text-align:center;padding:12px 4px}
+input[type=text],select{width:100%;padding:12px 14px;background:#0e0a06;border:1px solid var(--line);color:var(--ivory);font:inherit;font-size:18px;border-radius:0}
 button.go{margin-top:16px;padding:14px 24px;border:0;cursor:pointer;font:500 13px Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#1a1408;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo))}
 button.go:disabled{opacity:.5;cursor:default}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
 .radios label{display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font:400 17px 'Old Standard TT',serif;color:var(--ivory);margin:8px 0;cursor:pointer}
 .radios input{margin-top:6px}
-.tg{margin-top:20px;position:relative;background:linear-gradient(180deg,#f0e3c0,#e7d5a8);color:#2a2014;padding:0 0 18px;box-shadow:0 10px 28px rgba(0,0,0,.55);border-radius:2px;font-family:'Special Elite','Courier New',monospace;overflow:hidden;
- -webkit-mask:radial-gradient(circle 5px at 8px 0,transparent 98%,#000) top/16px 51% repeat-x,linear-gradient(#000,#000) bottom/100% 52% no-repeat}
-.tg:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 0,rgba(255,255,255,.35),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(120,90,40,.22),transparent 60%);pointer-events:none}
-.tg .top{display:flex;align-items:center;gap:12px;padding:16px 18px 10px;border-bottom:3px double #6b5530}
-.tg .top img{width:42px;height:42px;opacity:.85;filter:sepia(.4)}
-.tg .top .tt{flex:1}
-.tg .top b{display:block;font:700 20px 'Old Standard TT',serif;letter-spacing:.32em;color:#3a2a12}
-.tg .top span{display:block;font-size:11px;letter-spacing:.16em;color:#6b5530;margin-top:2px}
-.tg .meta{display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:11px;letter-spacing:.1em;color:#5a4a30;border-bottom:1px solid rgba(107,85,48,.5)}
-.tg .meta div{padding:7px 18px}
-.tg .meta div+div{border-left:1px solid rgba(107,85,48,.5)}
-.tg .meta u{text-decoration:none;color:#2a2014;font-size:13px;display:block}
-.tg .bd{padding:14px 14px 4px;display:flex;flex-direction:column;gap:7px}
-.tg .st{align-self:flex-start;max-width:100%;background:#f6ecd0;padding:5px 12px 4px;font-size:16px;line-height:1.35;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 1px 2px rgba(60,40,10,.35);word-break:break-word}
-.tg .st i{font-style:normal;font-size:11px;letter-spacing:.2em;color:#9a8660;margin-left:8px}
-.tg .st:nth-child(odd){transform:rotate(-.5deg)}.tg .st:nth-child(even){transform:rotate(.4deg);margin-left:6px}
-.tg .rc{position:absolute;right:14px;bottom:10px;border:2px solid rgba(150,40,30,.55);color:rgba(150,40,30,.6);font:700 11px Inter,sans-serif;letter-spacing:.2em;padding:5px 9px;transform:rotate(-8deg);border-radius:3px;pointer-events:none}
-.tg.err{filter:saturate(.75) brightness(.97)}
-.tgleg{font-size:14px;color:var(--mute);margin:10px 2px 0;font-style:italic}
+.center{text-align:center}
+
+/* cofre */
+.safe{margin:18px auto 0;max-width:420px;perspective:1100px;position:relative}
+.inside{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a2218,#050403 75%);border:6px solid #3a2f1a;display:flex;align-items:center;justify-content:center;color:var(--gold-lo);font:500 12px Inter,sans-serif;letter-spacing:.3em}
+.door{position:relative;transform-origin:left center;transition:transform 1.5s cubic-bezier(.65,.02,.25,1);transform-style:preserve-3d;padding:18px 16px 20px;border:7px solid #6e5a30;border-radius:4px;
+ background:linear-gradient(135deg,#4a4741 0%,#24221e 40%,#34312b 70%,#1b1916 100%);box-shadow:inset 0 0 0 2px #1a150b,inset 0 0 40px rgba(0,0,0,.6),0 14px 30px rgba(0,0,0,.6)}
+.door:before,.door:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e6cf98,#7a6130 70%);box-shadow:0 1px 2px #000}
+.door:before{left:8px;top:8px}.door:after{right:8px;top:8px}
+.door .rv2{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e6cf98,#7a6130 70%);box-shadow:0 1px 2px #000}
+.pp{position:absolute;width:62%;height:46%;background:linear-gradient(135deg,#e9d7aa,#cdb680);box-shadow:0 2px 6px rgba(0,0,0,.6);border-radius:1px}
+.p1{left:14%;top:34%;transform:rotate(-7deg)}.p2{left:22%;top:30%;transform:rotate(4deg);background:linear-gradient(135deg,#d8c08a,#b89d63)}.p3{left:18%;top:38%;transform:rotate(-2deg)}.p4{left:30%;top:46%;width:44%;height:30%;transform:rotate(9deg);background:linear-gradient(135deg,#8a6a3a,#5a4222)}
+.door.open{transform:rotateY(-104deg)}
+.plate{text-align:center;font:700 14px 'Old Standard TT',serif;letter-spacing:.5em;padding-left:.5em;color:var(--gold-hi);border-top:1px solid #6e5a30;border-bottom:1px solid #6e5a30;padding-top:6px;padding-bottom:6px;margin:6px 18px 16px;text-shadow:0 1px 0 #000}
+.wheels{display:flex;justify-content:center;gap:8px}
+.wh{display:flex;flex-direction:column;align-items:center;gap:4px;outline-offset:4px}
+.wh button{width:46px;height:24px;border:0;background:linear-gradient(180deg,#5a4a28,#2e2512);color:var(--gold-hi);cursor:pointer;font-size:12px;border-radius:2px;box-shadow:0 1px 0 #000}
+.wh button:active{filter:brightness(1.3)}
+.wh .win{width:46px;height:62px;background:linear-gradient(180deg,#050403,#1d1710 50%,#050403);border:2px solid #8a7038;display:flex;align-items:center;justify-content:center;font:700 28px 'Old Standard TT',Georgia,serif;color:#efe3c8;box-shadow:inset 0 0 12px #000;border-radius:3px}
+.handle{display:block;margin:20px auto 0;width:92px;height:92px;border:0;background:none;cursor:pointer;padding:0;transition:transform .9s cubic-bezier(.5,0,.3,1)}
+.handle svg{width:100%;height:100%;display:block}
+.handle.turn{transform:rotate(90deg)}
+.handle.shake{animation:sk .45s}
+@keyframes sk{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}45%{transform:rotate(11deg)}70%{transform:rotate(-6deg)}}
+.hcap{text-align:center;font:500 11px Inter,sans-serif;letter-spacing:.3em;color:var(--mute);margin-top:4px;text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){.door{transition:none}.handle{transition:none}.handle.shake{animation:none}}
+
+/* palavra */
+.slip{margin:18px auto 0;max-width:420px}
+.slip input{width:100%;background:#e9d7aa;color:#2a1a0e;border:0;border-bottom:3px double #6b5530;padding:16px 10px 10px;text-align:center;font:400 26px 'Special Elite','Courier New',monospace;letter-spacing:.24em;text-transform:uppercase;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.slip input:focus-visible{outline:2px solid var(--gold-hi)}
+
+/* telegrama no formulário de época */
+.tg{margin-top:20px;container-type:inline-size;box-shadow:0 12px 30px rgba(0,0,0,.6);animation:rv .7s ease both}
+.tg.err{filter:saturate(.8) brightness(.96)}
+.tg .th{position:relative;aspect-ratio:1448/346;background:url(form_top.jpg) center/100% 100% no-repeat}
+.tg .tt{position:absolute;left:23.5%;width:53%;top:48%;height:26%;display:flex;align-items:center;justify-content:center;font:700 calc(100cqw*.036) 'Old Standard TT',serif;letter-spacing:.42em;padding-left:.42em;color:#8a3a22}
+.tg .bx{position:absolute;top:78%;height:19%;display:flex;align-items:center;justify-content:center;font:400 calc(100cqw*.0165) 'Special Elite','Courier New',monospace;letter-spacing:.08em;color:#3a1a0e;text-transform:uppercase;white-space:nowrap}
+@container (max-width:540px){.tg .bx{display:none}}
+.tg .tb{--lh:max(27px,calc(100cqw*55/1448));position:relative;background:url(form_line.jpg) 0 0/100% var(--lh) repeat-y;padding:calc(var(--lh)*.1) 6.5% 0;min-height:calc(var(--lh)*5)}
+.tg .tx{font:400 calc(var(--lh)*.56) 'Special Elite','Courier New',monospace;line-height:var(--lh);color:#2e170b;text-transform:uppercase;letter-spacing:.05em;word-break:break-word;text-shadow:0 0 .6px rgba(46,23,11,.6)}
+.tg .rc{position:absolute;right:7%;bottom:calc(var(--lh)*.35);border:2px solid rgba(140,38,28,.6);color:rgba(140,38,28,.65);font:700 max(10px,calc(100cqw*.022)) Inter,sans-serif;letter-spacing:.22em;padding:.35em .7em;transform:rotate(-8deg);border-radius:3px;pointer-events:none}
+.tg .tf{position:relative;aspect-ratio:1448/146;background:url(form_bottom.jpg) center/100% 100% no-repeat}
+.tg .tf span{position:absolute;top:10%;height:52%;display:flex;align-items:center;font:400 max(9px,calc(100cqw*.0165)) 'Special Elite','Courier New',monospace;letter-spacing:.1em;color:#3a1a0e;text-transform:uppercase;white-space:nowrap}
+.tg .tf .l{left:5.2%}.tg .tf .r{left:72.8%;letter-spacing:.04em}
+
 .note{margin-top:18px;background:#e6d6ad;color:#2a2014;padding:20px 18px;font-family:'IM Fell English',serif;font-style:italic;font-size:19px;line-height:1.5;transform:rotate(-.6deg);box-shadow:0 8px 24px rgba(0,0,0,.5)}
 .note small{display:block;font:500 12px Inter,sans-serif;font-style:normal;letter-spacing:.12em;color:#5a4a30;margin-bottom:10px;text-transform:uppercase}
 .epi{margin-top:18px;border:1px solid var(--gold);padding:20px 18px;background:#120d08;font-size:18px;line-height:1.6}
@@ -79,23 +104,26 @@ footer a{color:var(--gold-hi)}
 <body>
 <div class="wrap">
 <header><img src="../../selo.png" alt="Beyond Suspicion Club"><div class="eyebrow">Caso Nº 01 · O Relojoeiro · Londres, 1891</div><h1>O Telégrafo</h1>
-<p class="intro">Aqui as respostas do dossiê chegam ao inspetor Lowe. O Sr. Morrow as leva e traz de volta os telegramas. Digite o que encontrar, uma etapa por vez.</p>
-<p class="tgleg" style="text-align:center">Nos telegramas da época, a palavra STOP fazia o papel do ponto final: cada tira é uma frase.</p></header>
+<p class="intro">Aqui as respostas do dossiê chegam ao inspetor Lowe. O Sr. Morrow as leva e traz de volta os telegramas.</p>
+<p class="tgleg">Nos telegramas da época, a palavra STOP fazia o papel do ponto final.</p></header>
 
-<section class="step" id="s1"><h2><span class="n">I.</span>O cofre do inspetor</h2>
-<p class="d">Informe os cinco números do inventário que abrem o cofre, em qualquer ordem.</p>
-<div class="nums"><input type="number" inputmode="numeric" min="1" max="99" aria-label="número 1"><input type="number" inputmode="numeric" min="1" max="99" aria-label="número 2"><input type="number" inputmode="numeric" min="1" max="99" aria-label="número 3"><input type="number" inputmode="numeric" min="1" max="99" aria-label="número 4"><input type="number" inputmode="numeric" min="1" max="99" aria-label="número 5"></div>
-<button class="go" id="b1">Enviar ao inspetor</button><div id="o1"></div></section>
+<section class="step" id="s1"><h2><span class="n">I.</span>O cofre</h2>
+<div class="safe" id="safe"><div class="inside"><i class="pp p1"></i><i class="pp p2"></i><i class="pp p3"></i><i class="pp p4"></i></div>
+<div class="door" id="door"><span class="rv2" style="left:8px;bottom:8px"></span><span class="rv2" style="right:8px;bottom:8px"></span>
+<div class="plate">COFRE · LOWE</div>
+<div class="wheels" id="wheels"></div>
+<button class="handle" id="handle" aria-label="Girar a maçaneta do cofre"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="g1" cx="35%" cy="30%"><stop offset="0" stop-color="#f0dca2"/><stop offset=".6" stop-color="#a98a46"/><stop offset="1" stop-color="#5a4520"/></radialGradient></defs>
+<circle cx="50" cy="50" r="46" fill="#1a150b" stroke="#6e5a30" stroke-width="3"/><g stroke="url(#g1)" stroke-width="9" stroke-linecap="round"><line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/></g><circle cx="50" cy="50" r="13" fill="url(#g1)" stroke="#2a2010"/><circle cx="50" cy="50" r="4" fill="#2a2010"/><circle cx="50" cy="12" r="6" fill="url(#g1)"/><circle cx="50" cy="88" r="6" fill="url(#g1)"/><circle cx="12" cy="50" r="6" fill="url(#g1)"/><circle cx="88" cy="50" r="6" fill="url(#g1)"/></svg></button>
+<div class="hcap">girar</div></div></div>
+<div id="o1"></div></section>
 
-<section class="step locked" id="s2"><h2><span class="n">II.</span>A palavra do poema</h2>
-<p class="d">Digite a palavra escondida no poema rasgado.</p>
-<input type="text" id="i2" autocomplete="off" autocapitalize="characters" aria-label="palavra">
-<button class="go" id="b2">Enviar ao inspetor</button><div id="o2"></div></section>
+<section class="step locked" id="s2"><h2><span class="n">II.</span></h2>
+<div class="slip"><input type="text" id="i2" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Palavra"></div>
+<div class="center"><button class="go" id="b2">Telegrafar</button></div><div id="o2"></div></section>
 
-<section class="step locked" id="s3"><h2><span class="n">III.</span>A hora do mecanismo</h2>
-<p class="d">Monte o esquema da fechadura com as cartas. Depois ajuste o relógio na hora que o mecanismo indica: arraste os ponteiros.</p>
+<section class="step locked" id="s3"><h2><span class="n">III.</span></h2>
 <div class="clockbox" id="c3"></div>
-<div style="text-align:center"><button class="go" id="b3">Enviar ao inspetor</button></div><div id="o3"></div></section>
+<div class="center"><button class="go" id="b3">Telegrafar</button></div><div id="o3"></div></section>
 
 <section class="step locked" id="s4"><h2><span class="n">IV.</span>A acusação</h2>
 <p class="d">Responda às três perguntas. O inspetor só aceita a acusação completa.</p>
@@ -110,7 +138,7 @@ footer a{color:var(--gold-hi)}
 <label><input type="radio" name="porta" value="c"> (c) Alguém ajustou a fechadura para trancar sozinha depois que ele saiu.</label>
 <label><input type="radio" name="porta" value="d"> (d) A porta foi trancada por quem estava lá dentro às 23h.</label></div>
 <div id="q4" class="hide"><label>A que horas Vale programou a fechadura?</label><div class="clockbox" id="c4b"></div></div>
-<div style="text-align:center"><button class="go" id="b4">Enviar ao inspetor</button></div></div>
+<div class="center"><button class="go" id="b4">Enviar ao inspetor</button></div></div>
 <div id="o4"></div></section>
 
 <section class="step locked" id="sb"><h2><span class="n">★</span>Pergunta bônus</h2>
@@ -136,19 +164,17 @@ async function dec(secret,blob){
  var p=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},k,ct);return td.decode(p)}catch(e){return null}}
 var store={};try{store=JSON.parse(localStorage.getItem('bsc1')||'{}')}catch(e){}
 function save(){try{localStorage.setItem('bsc1',JSON.stringify(store))}catch(e){}}
-var TGN=0;
+var BOX=[['3%','17.7%','CLERKENWELL'],['21.1%','19.4%','INSP. LOWE'],['40.7%','18.5%','VIA M.'],['59.5%','19.5%','URGENTE'],['79.4%','18%','Nº ']];
 function tg(txt,err){var d=document.createElement('div');d.className='tg'+(err?' err':'');
- var n=String(Math.floor(100+Math.random()*800));
- d.innerHTML='<div class="top"><img src="../../selo.png" alt=""><div class="tt"><b>TELEGRAMA</b><span>RETRANSMITIDO POR M. · CLERKENWELL</span></div></div><div class="meta"><div>DE<u>INSP. LOWE</u></div><div>Nº<u></u></div></div><div class="bd"></div>'+(err?'':'<div class="rc">RECEBIDO</div>');
- d.querySelector('.meta div+div u').textContent=n;
- var bd=d.querySelector('.bd'),parts=txt.split(/\s*STOP\s*/).filter(function(x){return x.trim()});
- var hasStop=/STOP/.test(txt);
- parts.forEach(function(p,i){var s=document.createElement('div');s.className='st';s.textContent=p;if(hasStop&&i<parts.length-1||(hasStop&&/STOP\s*$/.test(txt))){var k=document.createElement('i');k.textContent='STOP';s.appendChild(k)}bd.appendChild(s)});
- if(!hasStop){var s=document.createElement('div');s.className='st';s.textContent=txt;bd.appendChild(s)}
- return d}
+ var th=document.createElement('div');th.className='th';var t=document.createElement('div');t.className='tt';t.textContent='TELEGRAMA';th.appendChild(t);
+ BOX.forEach(function(b,i){var x=document.createElement('div');x.className='bx';x.style.left=b[0];x.style.width=b[1];x.textContent=i===4?'Nº '+Math.floor(100+Math.random()*800):b[2];th.appendChild(x)});
+ var tb=document.createElement('div');tb.className='tb';var tx=document.createElement('div');tx.className='tx';tx.textContent=txt;tb.appendChild(tx);
+ if(!err){var rc=document.createElement('div');rc.className='rc';rc.textContent='RECEBIDO';tb.appendChild(rc)}
+ var tf=document.createElement('div');tf.className='tf';tf.innerHTML='<span class="l">RETRANSMITIDO POR M.</span><span class="r">CLERKENWELL</span>';
+ d.appendChild(th);d.appendChild(tb);d.appendChild(tf);return d}
 function show(id,node,keep){var o=$(id);if(!keep)o.innerHTML='';o.appendChild(node)}
-function unlock(n){document.querySelectorAll('.hintrow').forEach(function(r){if(+r.dataset.need<=n-1)r.classList.remove('hide')});var s=$('s'+n);s.classList.remove('locked');s.classList.add('rev');if(n===4){var sb=$('sb');sb.classList.remove('locked');sb.classList.add('rev')}var l=$('l'+n);if(l)l.classList.add('hide')}
-function busy(b,on){b.disabled=on;b.textContent=on?'Enviando…':'Enviar ao inspetor'}
+function unlock(n){document.querySelectorAll('.hintrow').forEach(function(r){if(+r.dataset.need<=n-1)r.classList.remove('hide')});var s=$('s'+n);s.classList.remove('locked');s.classList.add('rev');if(n===4){var sb=$('sb');sb.classList.remove('locked');sb.classList.add('rev')}}
+function busy(b,on){b.disabled=on;if(b.dataset.l===undefined)b.dataset.l=b.textContent;b.textContent=on?'Enviando…':b.dataset.l}
 var ZERO=['NENHUM','UM','DOIS','TRÊS','QUATRO'];
 
 /* clock */
@@ -183,18 +209,32 @@ function Clock(host){
 var c3=Clock($('c3')),c4a=Clock($('c4a')),c4b=Clock($('c4b'));
 function cand(m){return [m,(m+1)%720,(m+719)%720]}
 
+
+/* cofre na tela */
+var wv=[1,1,1,1,1],MAXN=18,wh=$('wheels'),wins=[];
+function wset(i,v){wv[i]=((v-1+MAXN)%MAXN)+1;wins[i].textContent=wv[i];wins[i].parentNode.setAttribute('aria-valuenow',wv[i])}
+for(var wi=0;wi<5;wi++)(function(i){
+ var c=document.createElement('div');c.className='wh';c.tabIndex=0;c.setAttribute('role','spinbutton');c.setAttribute('aria-label','Número '+(i+1));c.setAttribute('aria-valuemin','1');c.setAttribute('aria-valuemax',MAXN);
+ var u=document.createElement('button');u.type='button';u.textContent='▲';u.setAttribute('aria-label','aumentar');var w=document.createElement('div');w.className='win';var dn=document.createElement('button');dn.type='button';dn.textContent='▼';dn.setAttribute('aria-label','diminuir');
+ c.appendChild(u);c.appendChild(w);c.appendChild(dn);wh.appendChild(c);wins.push(w);
+ u.addEventListener('click',function(){wset(i,wv[i]+1)});dn.addEventListener('click',function(){wset(i,wv[i]-1)});
+ c.addEventListener('keydown',function(e){if(e.key==='ArrowUp'){wset(i,wv[i]+1);e.preventDefault()}else if(e.key==='ArrowDown'){wset(i,wv[i]-1);e.preventDefault()}});
+ w.addEventListener('wheel',function(e){wset(i,wv[i]+(e.deltaY<0?1:-1));e.preventDefault()},{passive:false});
+ wset(i,1)})(wi);
+(function(){var sf=$('safe'),dr=$('door'),ins=sf.querySelector('.inside');function fit(){ins.style.top=0}fit()})();
+
 /* etapas */
+function openSafe(instant){var h=$('handle'),d=$('door');h.classList.add('turn');if(instant){d.style.transition='none';d.classList.add('open');setTimeout(function(){d.style.transition=''},50)}else setTimeout(function(){d.classList.add('open')},850)}
 async function stage1(nums,silent){
- var out=$('o1');
- if(nums.some(function(n){return !(n>=1)})){if(!silent)show('o1',tg('INFORME OS CINCO NÚMEROS STOP LOWE',true));return false}
- if(new Set(nums).size<5){if(!silent)show('o1',tg('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true));return false}
+ if(new Set(nums).size<5){if(!silent){shake();show('o1',tg('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true))}return false}
  var key='cofre:'+nums.slice().sort(function(a,b){return a-b}).join('-');
  var t=await dec(key,D.cofre);
- if(t){store.s1=nums;save();show('o1',tg(t));unlock(2);return true}
+ if(t){store.s1=nums;save();openSafe(silent);if(silent){show('o1',tg(t));unlock(2)}else{setTimeout(function(){show('o1',tg(t));unlock(2)},1500)}return true}
  var hs=await Promise.all(nums.map(function(n){return sha('n:'+n)})),c=hs.filter(function(h){return D.cofre_h.indexOf(h)>=0}).length;
- if(!silent)show('o1',tg(c===0?'O COFRE NÃO ABRIU STOP NENHUM DOS CINCO NÚMEROS CONFERE STOP LOWE':'O COFRE NÃO ABRIU STOP SE EU PUDESSE CONFERIR O QUE ESTÁ ERRADO STOP POR ENQUANTO POSSO DIZER QUE '+ZERO[c]+' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',true));
+ if(!silent){shake();show('o1',tg(c===0?'O COFRE NÃO ABRIU STOP NENHUM DOS CINCO NÚMEROS CONFERE STOP LOWE':'O COFRE NÃO ABRIU STOP SE EU PUDESSE CONFERIR O QUE ESTÁ ERRADO STOP POR ENQUANTO POSSO DIZER QUE '+ZERO[c]+' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',true))}
  return false}
-function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z]/g,'')}
+function shake(){var h=$('handle');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake')}
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z]/g,'')}
 async function stage2(w,silent){
  var t=await dec('palavra:'+norm(w),D.palavra);
  if(t){store.s2=w;save();show('o2',tg(t));unlock(3);return true}
@@ -206,9 +246,9 @@ async function stage3(m,silent){
    var n=document.createElement('div');n.className='note';n.innerHTML='<small></small><div></div>';n.firstChild.textContent=o.nota;n.lastChild.textContent=o.bilhete;box.appendChild(n);box.appendChild(tg(o.tel));unlock(4);return true}}
  if(!silent)show('o3',tg('ESSA NÃO PARECE A HORA PROGRAMADA STOP LOWE',true));return false}
 async function tryTime(prefix,blob,m){var cs=cand(m);for(var i=0;i<cs.length;i++){var t=await dec(prefix+cs[i],blob);if(t)return cs[i]}return null}
-async function stage4(silent){
+async function stage4(){
  var who=$('q1').value,r=document.querySelector('input[name=porta]:checked'),door=r&&r.value;
- if(!who||!door){if(!silent)show('o4',tg('A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM AS TRÊS PERGUNTAS STOP LOWE',true));return false}
+ if(!who||!door){show('o4',tg('A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM AS TRÊS PERGUNTAS STOP LOWE',true));return false}
  var wok=await dec('quem:'+who,D.quem_ok);
  if(!wok){var s=await dec('quem-msg:'+who,D.sus[who]);show('o4',tg(s||'O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
  var mt=await tryTime('morte:',D.morte_ok,c4a.mins());
@@ -218,16 +258,17 @@ async function stage4(silent){
  if(pt===null){show('o4',tg('O DIÁRIO DIZ OUTRA COISA STOP LOWE',true));return false}
  var f=await dec('final:pike|'+mt+'|c|'+pt,D.final);
  if(!f){show('o4',tg('O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
- store.s4={q:who,t:c4a.mins(),p:c4b.mins()};save();
+ store.s4=1;save();
  var box=$('o4');box.innerHTML='';var e=document.createElement('div');e.className='epi';e.innerHTML='<h3>Caso encerrado</h3><div></div>';e.lastChild.textContent=f;box.appendChild(tg('ACUSAÇÃO CONFIRMADA STOP PARABÉNS STOP LOWE'));box.appendChild(e);
  $('f4').classList.add('hide');return true}
 
 function bind(id,fn){var b=$(id);b.addEventListener('click',async function(){busy(b,true);try{await fn()}finally{busy(b,false)}})}
-bind('b1',function(){var v=Array.prototype.map.call(document.querySelectorAll('#s1 .nums input'),function(i){return parseInt(i.value,10)});return stage1(v)});
+$('handle').addEventListener('click',function(){var h=$('handle');if(h.classList.contains('turn'))return;stage1(wv.slice())});
 bind('b2',function(){return stage2($('i2').value)});
 bind('b3',function(){return stage3(c3.mins())});
 bind('b4',function(){return stage4()});
 bind('bb',async function(){if(!$('ib').value.trim()){show('ob',tg('ENVIE ALGUMA RESPOSTA STOP LOWE',true));return}show('ob',tg(D.bonus))});
+$('i2').addEventListener('keydown',function(e){if(e.key==='Enter')$('b2').click()});
 document.querySelectorAll('input[name=porta]').forEach(function(r){r.addEventListener('change',function(){$('q4').classList.toggle('hide',r.value!=='c'||!r.checked)})});
 
 /* dicas */
@@ -241,13 +282,13 @@ D.hints.forEach(function(g){
  bt.addEventListener('click',async function(){if(shown>=n)return;var t=await dec(HP,g[1][shown]);var p=document.createElement('p');p.className='hx';p.textContent=(shown+1)+'. '+t;hx.appendChild(p);shown++;if(shown>=n)bt.classList.add('hide');else lab()});
  $('hints').appendChild(row)});
 
+
 /* restaurar progresso */
 (async function(){
  try{
-  if(store.s1){var ins=document.querySelectorAll('#s1 .nums input');store.s1.forEach(function(n,i){ins[i].value=n});if(!(await stage1(store.s1,true)))return}else return;
+  if(store.s1){store.s1.forEach(function(n,i){wset(i,n)});if(!(await stage1(store.s1,true)))return}else return;
   if(store.s2){$('i2').value=store.s2;if(!(await stage2(store.s2,true)))return}else return;
-  if(store.s3!=null){var m=store.s3;if(!(await stage3(m,true)))return}else return;
-  if(store.s4){/* a resposta final precisa ser reenviada */}
+  if(store.s3!=null){if(!(await stage3(store.s3,true)))return}
  }catch(e){}
 })();
 })();
