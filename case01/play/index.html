@@ -24,6 +24,7 @@ h1{font-weight:400;font-size:clamp(34px,7vw,52px);margin:8px 0 0;line-height:1.0
 .tgleg{font-size:14px;color:var(--mute);margin:10px 2px 0;font-style:italic;text-align:center}
 .step{margin-top:28px;border:1px solid var(--line);padding:22px 20px;background:linear-gradient(180deg,var(--bg2),#100b07)}
 .step.locked{display:none}
+#s1{overflow-x:clip}
 .step.rev{animation:rv .8s ease both}
 @keyframes rv{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .step h2{margin:0;font-weight:400;font-size:26px;display:flex;gap:12px;align-items:baseline}
@@ -56,27 +57,24 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 @keyframes slideup{from{opacity:0;transform:translateY(60px) scale(.9)}to{opacity:1;transform:none}}
 
 /* cofre */
-.safe{margin:18px auto 0;max-width:420px;perspective:1100px;position:relative}
-.inside{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a2218,#050403 75%);border:6px solid #3a2f1a;display:flex;align-items:center;justify-content:center}
+.safe{margin:18px auto 0;max-width:400px;aspect-ratio:998/1168;perspective:1400px;position:relative}
+.inside{position:absolute;inset:3% 4%;background:radial-gradient(ellipse at 50% 40%,#2a2218,#050403 75%);border:6px solid #3a2f1a;display:flex;align-items:center;justify-content:center}
 .inside .env{width:62%}
-.door{position:relative;transform-origin:left center;transition:transform 1.5s cubic-bezier(.65,.02,.25,1);transform-style:preserve-3d;padding:18px 16px 20px;border:7px solid #6e5a30;border-radius:4px;
- background:linear-gradient(135deg,#4a4741 0%,#24221e 40%,#34312b 70%,#1b1916 100%);box-shadow:inset 0 0 0 2px #1a150b,inset 0 0 40px rgba(0,0,0,.6),0 14px 30px rgba(0,0,0,.6)}
-.door:before,.door:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e6cf98,#7a6130 70%);box-shadow:0 1px 2px #000}
-.door:before{left:8px;top:8px}.door:after{right:8px;top:8px}
-.door .rv2{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e6cf98,#7a6130 70%);box-shadow:0 1px 2px #000}
-.door.open{transform:rotateY(-104deg)}
-.plate{text-align:center;font:700 14px 'Old Standard TT',serif;letter-spacing:.5em;padding-left:.5em;color:var(--gold-hi);border-top:1px solid #6e5a30;border-bottom:1px solid #6e5a30;padding-top:6px;padding-bottom:6px;margin:6px 18px 16px;text-shadow:0 1px 0 #000}
-.wheels{display:flex;justify-content:center;gap:8px}
-.wh{display:flex;flex-direction:column;align-items:center;gap:4px;outline-offset:4px}
-.wh button{width:46px;height:24px;border:0;background:linear-gradient(180deg,#5a4a28,#2e2512);color:var(--gold-hi);cursor:pointer;font-size:12px;border-radius:2px;box-shadow:0 1px 0 #000}
+.door{position:absolute;inset:0;container-type:inline-size;transform-origin:right center;transition:transform 1.6s cubic-bezier(.65,.02,.25,1);background:url(cofre_porta.png) 0 0/100% 100% no-repeat;filter:drop-shadow(0 14px 22px rgba(0,0,0,.6))}
+.door.open{transform:rotateY(104deg)}
+.wheels{position:absolute;inset:0;pointer-events:none}
+.wh{position:absolute;top:25.7%;width:8.4%;height:25.7%;outline-offset:3px}
+.wh button{position:absolute;left:0;right:0;height:16%;border:0;background:linear-gradient(180deg,#8a6f36,#4a3a1a);color:#f0dca2;cursor:pointer;font-size:3.2cqw;line-height:1;border-radius:2px;pointer-events:auto;padding:0;box-shadow:0 1px 0 #000}
+.wh button:first-child{top:0}.wh button:last-child{top:84%}
 .wh button:active{filter:brightness(1.3)}
-.wh .win{width:46px;height:62px;background:linear-gradient(180deg,#050403,#1d1710 50%,#050403);border:2px solid #8a7038;display:flex;align-items:center;justify-content:center;font:700 28px 'Old Standard TT',Georgia,serif;color:#efe3c8;box-shadow:inset 0 0 12px #000;border-radius:3px}
-.handle{display:block;margin:20px auto 0;width:92px;height:92px;border:0;background:none;cursor:pointer;padding:0;transition:transform .9s cubic-bezier(.5,0,.3,1)}
-.handle svg{width:100%;height:100%;display:block}
-.handle.turn{transform:rotate(90deg)}
+.wh .win{position:absolute;left:0;right:0;top:17.7%;height:43.3%;display:flex;align-items:center;justify-content:center;font:700 8.4cqw 'Old Standard TT',Georgia,serif;color:#efe3c8;text-shadow:0 0 6px rgba(230,207,152,.45);background:rgba(5,4,3,.55);pointer-events:auto}
+.handle{position:absolute;left:48.7%;top:67.7%;width:62.1%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;cursor:pointer;padding:0;transition:transform .9s cubic-bezier(.5,0,.3,1)}
+.handle img{width:100%;height:100%;display:block;pointer-events:none}
+.handle:before{content:"";position:absolute;left:19%;top:19%;width:62%;height:62%;border-radius:50%}
+.handle.turn{transform:translate(-50%,-50%) rotate(90deg)}
 .handle.shake{animation:sk .45s}
-@keyframes sk{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}45%{transform:rotate(11deg)}70%{transform:rotate(-6deg)}}
-.hcap{text-align:center;font:500 11px Inter,sans-serif;letter-spacing:.3em;color:var(--mute);margin-top:4px;text-transform:uppercase}
+@keyframes sk{0%,100%{transform:translate(-50%,-50%) rotate(0)}20%{transform:translate(-50%,-50%) rotate(-14deg)}45%{transform:translate(-50%,-50%) rotate(11deg)}70%{transform:translate(-50%,-50%) rotate(-6deg)}}
+.hcap{position:absolute;left:0;right:0;top:93%;text-align:center;font:500 2.6cqw Inter,sans-serif;letter-spacing:.3em;color:#a89878;text-transform:uppercase;pointer-events:none}
 
 /* cadeado */
 .lockwrap{display:flex;justify-content:center;margin-top:12px}
@@ -90,6 +88,21 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 .plateinp input:focus-visible{outline:2px solid var(--gold-hi)}
 @media (prefers-reduced-motion:reduce){.door,.handle,#shackle{transition:none}.handle.shake,.lockwrap.shake svg,.step.rev,.envslot .env,.tg{animation:none}}
 
+.cwrap{perspective:900px;margin-top:6px}
+.comp{position:relative}
+.cplate{display:block;margin:10px auto 0;max-width:300px;text-align:center;padding:12px 10px;font:700 12px 'Old Standard TT',serif;letter-spacing:.4em;color:#2a2010;background:linear-gradient(180deg,#e2c77d,#9c7d3f);border:2px solid #4a3512;border-radius:3px;box-shadow:0 6px 14px rgba(0,0,0,.55),inset 0 1px 2px rgba(255,255,255,.5);transform-origin:top center;transition:transform 1.1s cubic-bezier(.6,0,.3,1),opacity .4s 1s}
+.comp.open .cplate{transform:rotateX(-100deg);opacity:0;pointer-events:none;position:absolute;left:0;right:0;top:0}
+.comp .cin{display:block}
+.cstage{position:relative;width:min(80vw,310px);perspective:900px}
+.cstage svg.vel{position:absolute;left:0;top:0;width:100%;height:auto;overflow:visible}
+.cflip{position:relative;transform-origin:50% 8%;transition:transform 1.4s cubic-bezier(.6,0,.25,1);backface-visibility:hidden}
+.cflip svg{width:100%!important}
+.clockbox.open .cflip{transform:rotateX(-112deg);pointer-events:none}
+.clockbox.open .readout,.clockbox.open .zero{display:none}
+.clockbox.open svg.vel{filter:drop-shadow(0 12px 18px rgba(0,0,0,.6))}
+.mk{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.mk .chip{font:500 22px Inter,sans-serif;letter-spacing:.1em;color:var(--gold-hi);min-width:70px}
+.mk button.go{margin-top:0;padding:11px 16px}
 /* telegrama no formulário de época */
 .tg{margin-top:20px;container-type:inline-size;box-shadow:0 12px 30px rgba(0,0,0,.6);animation:rv .7s ease both}
 .tg.err{filter:saturate(.8) brightness(.96)}
@@ -139,12 +152,9 @@ footer a{color:var(--gold-hi)}
 
 <section class="step" id="s1"><h2><span class="n">I.</span><span>O cofre</span><span class="ck">✓ rever</span></h2><div class="body">
 <div class="safe" id="safe"><div class="inside" id="inside"></div>
-<div class="door" id="door"><span class="rv2" style="left:8px;bottom:8px"></span><span class="rv2" style="right:8px;bottom:8px"></span>
-<div class="plate">COFRE · LOWE</div>
-<div class="wheels" id="wheels"></div>
-<button class="handle" id="handle" aria-label="Girar a maçaneta do cofre"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="g1" cx="35%" cy="30%"><stop offset="0" stop-color="#f0dca2"/><stop offset=".6" stop-color="#a98a46"/><stop offset="1" stop-color="#5a4520"/></radialGradient></defs>
-<circle cx="50" cy="50" r="46" fill="#1a150b" stroke="#6e5a30" stroke-width="3"/><g stroke="url(#g1)" stroke-width="9" stroke-linecap="round"><line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/></g><circle cx="50" cy="50" r="13" fill="url(#g1)" stroke="#2a2010"/><circle cx="50" cy="50" r="4" fill="#2a2010"/><circle cx="50" cy="12" r="6" fill="url(#g1)"/><circle cx="50" cy="88" r="6" fill="url(#g1)"/><circle cx="12" cy="50" r="6" fill="url(#g1)"/><circle cx="88" cy="50" r="6" fill="url(#g1)"/></svg></button>
-<div class="hcap" id="hcap">girar</div></div></div>
+<div class="door" id="door"><div class="wheels" id="wheels"></div>
+<button class="handle" id="handle" aria-label="Girar a maçaneta do cofre"><img src="cofre_manopla.png" alt=""></button>
+<div class="hcap" id="hcap">girar a maçaneta</div></div></div>
 <div class="center"><button type="button" class="zero hide" id="closeBtn">Fechar o cofre</button></div>
 <div id="o1"></div><div class="center" id="n1"></div></div></section>
 
@@ -159,21 +169,21 @@ footer a{color:var(--gold-hi)}
 
 <section class="step locked" id="s3"><h2><span class="n">III.</span><span>O relógio</span><span class="ck">✓ rever</span></h2><div class="body">
 <div class="clockbox" id="c3"></div>
-<div class="center"><button class="go" id="b3">Telegrafar</button></div><div id="o3"></div><div class="center" id="n3"></div></div></section>
+<div class="center"><button class="go" id="b3">Telegrafar</button></div><div class="cwrap"><div class="comp" id="comp"><div class="cin" id="o3"></div></div></div><div class="center" id="n3"></div></div></section>
 
 <section class="step locked" id="s4"><h2><span class="n">IV.</span><span>A acusação</span><span class="ck">✓ rever</span></h2><div class="body">
-<p class="d">Responda às perguntas. O inspetor só aceita a acusação completa.</p>
+<p class="d">Responda às perguntas. O inspetor só aceita a acusação completa. Use o mesmo relógio: depois de cada horário marcado, o mecanismo se fecha sozinho.</p><div id="c4slot"></div>
 <div id="f4">
 <label for="q1">Quem matou Ambrose Vale?</label>
 <select id="q1"><option value="">Escolha um nome…</option><option value="reed">Thomas Reed</option><option value="harriet">Harriet Vale</option><option value="pike">Cornelius Pike</option><option value="ashby">Dr. Ashby</option><option value="pratt">Agnes Pratt</option><option value="dobbs">Joseph Dobbs</option><option value="finch">Samuel Finch</option><option value="hargreaves">William Hargreaves</option></select>
-<label>A que horas ele morreu?</label><div class="clockbox" id="c4a"></div>
+<label>A que horas ele morreu?</label><div class="mk"><button type="button" class="go nx" id="mk1">Marcar horário do relógio</button><span class="chip" id="chip1">—</span></div>
 <label>Como a porta da oficina ficou trancada?</label>
 <div class="radios" id="q3">
 <label><input type="radio" name="porta" value="a"> (a) Ambrose girou a chave por dentro e morreu logo depois.</label>
 <label><input type="radio" name="porta" value="b"> (b) Alguém girou a chave por fora e a levou embora.</label>
 <label><input type="radio" name="porta" value="c"> (c) O ferrolho correu sozinho, na hora que o mecanismo marcava.</label>
 <label><input type="radio" name="porta" value="d"> (d) Alguém forçou a porta por fora e o ferrolho caiu no lugar.</label></div>
-<label>E a que horas Vale regulou a fechadura?</label><div class="clockbox" id="c4b"></div>
+<label>E a que horas Vale regulou a fechadura?</label><div class="mk"><button type="button" class="go nx" id="mk2">Marcar horário do relógio</button><span class="chip" id="chip2">—</span></div>
 <div class="center"><button class="go" id="b4">Enviar ao inspetor</button></div></div>
 <div id="o4"></div><div class="envslot" id="env4"></div></div></section>
 
@@ -231,7 +241,7 @@ $('ovx').addEventListener('click',closeOv);document.addEventListener('keydown',f
 
 function show(id,node,keep){var o=$(id);if(!keep)o.innerHTML='';o.appendChild(node)}
 function revealHints(n){document.querySelectorAll('.hintrow').forEach(function(r){if(+r.dataset.need<=n-1)r.classList.remove('hide')})}
-function unlock(n){revealHints(n);var s=$('s'+n);s.classList.remove('locked');s.classList.add('rev');if(n===4){var sb=$('sb');sb.classList.remove('locked');sb.classList.add('rev')}}
+function unlock(n){if(n===4){c3.reset();$('c4slot').appendChild($('c3'));setTimeout(function(){c3.shut()},700)}revealHints(n);var s=$('s'+n);s.classList.remove('locked');s.classList.add('rev');if(n===4){var sb=$('sb');sb.classList.remove('locked');sb.classList.add('rev')}}
 function markDone(n){var s=$('s'+n);s.classList.add('done');s.classList.remove('show')}
 document.querySelectorAll('.step h2').forEach(function(h){h.addEventListener('click',function(){var s=h.parentNode;if(s.classList.contains('done'))s.classList.toggle('show')})});
 function nextBtn(n,hideSel){/* some controles, mostra Próximo */
@@ -273,7 +283,11 @@ function Clock(host){
  s+='<circle cx="150" cy="'+cy+'" r="6" fill="#1d2233"/><circle cx="150" cy="'+cy+'" r="2.4" fill="#c79f4a"/>';
  s+='<g clip-path="url(#cp'+uid+')"><ellipse cx="120" cy="'+(cy-66)+'" rx="86" ry="52" fill="url(#gh'+uid+')" transform="rotate(-24 120 '+(cy-66)+')" opacity=".55"/></g>';
  s+='<line id="hhit'+uid+'" x1="150" y1="'+cy+'" x2="150" y2="'+(cy-68)+'" stroke="transparent" stroke-width="34" style="cursor:grab"/><line id="mhit'+uid+'" x1="150" y1="'+(cy-78)+'" x2="150" y2="'+(cy-112)+'" stroke="transparent" stroke-width="28" style="cursor:grab"/>';
- svg.innerHTML=s;host.appendChild(svg);
+ svg.innerHTML=s;
+ var stage=document.createElement('div');stage.className='cstage';
+ var vel=document.createElementNS(NS,'svg');vel.setAttribute('viewBox','0 0 300 336');vel.setAttribute('class','vel');vel.setAttribute('aria-hidden','true');
+ vel.innerHTML='<defs><radialGradient id="vv'+uid+'" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#7a1f24"/><stop offset=".7" stop-color="#4a1014"/><stop offset="1" stop-color="#2a080b"/></radialGradient></defs><circle cx="150" cy="176" r="148" fill="#8d6a28" stroke="#3a2a0e" stroke-width="2"/><circle cx="150" cy="176" r="133" fill="url(#vv'+uid+')" stroke="#d9b862" stroke-width="3"/><circle cx="150" cy="176" r="118" fill="none" stroke="rgba(230,207,152,.35)" stroke-dasharray="2 5"/><g transform="rotate(-8 150 176)"><rect x="104" y="136" width="92" height="80" fill="#e8d8b0" stroke="#8a7440"/><line x1="104" y1="176" x2="196" y2="176" stroke="#b9a578" stroke-width=".8"/><line x1="150" y1="136" x2="150" y2="216" stroke="#b9a578" stroke-width=".8"/></g><circle cx="150" cy="176" r="6" fill="#d9b862"/>';
+ var flip=document.createElement('div');flip.className='cflip';flip.appendChild(svg);stage.appendChild(vel);stage.appendChild(flip);host.appendChild(stage);
  var out=document.createElement('div');out.className='readout';host.appendChild(out);
  var hh=svg.querySelector('#hh'+uid),mh=svg.querySelector('#mh'+uid),hhit=svg.querySelector('#hhit'+uid),mhit=svg.querySelector('#mhit'+uid);
  function rot(e,a){e.setAttribute('transform','rotate('+a+' 150 '+cy+')')}
@@ -288,20 +302,24 @@ function Clock(host){
   draw();e.preventDefault()});
  var up=function(){drag=null};svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
  /* mostrador opcional feito por IA: relogio_face.png (sem ponteiros, 12 no topo) */
- var im=new Image();im.onload=function(){var el=document.createElementNS(NS,'image');el.setAttribute('href','relogio_face.png');el.setAttribute('x',cx-128);el.setAttribute('y',cy-128);el.setAttribute('width',256);el.setAttribute('height',256);el.setAttribute('clip-path','url(#cp'+uid+')');svg.querySelector('#bi'+uid).replaceWith(el)};im.src='relogio_face.png';
+ var im=new Image();im.onload=function(){var el=document.createElementNS(NS,'image');el.setAttribute('href','relogio_face.png');el.setAttribute('x',cx-120.2);el.setAttribute('y',cy-122);el.setAttribute('width',240);el.setAttribute('height',240);svg.querySelector('#bi'+uid).replaceWith(el)};im.src='relogio_face.png';
  draw();
+ self.open=function(inst){if(inst){flip.style.transition='none';host.classList.add('open');setTimeout(function(){flip.style.transition=''},60)}else host.classList.add('open')};
+ self.shut=function(inst){if(inst){flip.style.transition='none';host.classList.remove('open');setTimeout(function(){flip.style.transition=''},60)}else host.classList.remove('open')};
  self.mins=function(){return (self.h%12)*60+self.m};
  self.reset=function(){self.h=12;self.m=0;draw()};
+ self.close=function(){var t0=self.mins(),st=null,D0=1100;var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;if(reduce||t0===0){self.reset();return}
+  function f(ts){if(st===null)st=ts;var k=Math.min(1,(ts-st)/D0),e=1-Math.pow(1-k,3),t=Math.round(t0+(720-t0)*e)%720;self.h=Math.floor(t/60);self.m=t%60;draw();if(k<1)requestAnimationFrame(f);else self.reset()}requestAnimationFrame(f)};
  var rb=document.createElement('button');rb.type='button';rb.className='zero';rb.textContent='Zerar o relógio';rb.addEventListener('click',self.reset);host.appendChild(rb);
  return self}
-var c3=Clock($('c3')),c4a=Clock($('c4a')),c4b=Clock($('c4b'));
+var c3=Clock($('c3')),T1=null,T2=null;
 function cand(m){return [m,(m+1)%720,(m+719)%720]}
 
 /* cofre na tela */
 var wv=[1,1,1,1,1],MAXN=18,wh=$('wheels'),wins=[];
 function wset(i,v){wv[i]=((v-1+MAXN)%MAXN)+1;wins[i].textContent=wv[i];wins[i].parentNode.setAttribute('aria-valuenow',wv[i])}
 for(var wi=0;wi<5;wi++)(function(i){
- var c=document.createElement('div');c.className='wh';c.tabIndex=0;c.setAttribute('role','spinbutton');c.setAttribute('aria-label','Número '+(i+1));c.setAttribute('aria-valuemin','1');c.setAttribute('aria-valuemax',MAXN);
+ var c=document.createElement('div');c.className='wh';c.style.left=((221+i*111.9)/998*100)+'%';c.tabIndex=0;c.setAttribute('role','spinbutton');c.setAttribute('aria-label','Número '+(i+1));c.setAttribute('aria-valuemin','1');c.setAttribute('aria-valuemax',MAXN);
  var u=document.createElement('button');u.type='button';u.textContent='▲';u.setAttribute('aria-label','aumentar');var w=document.createElement('div');w.className='win';var dn=document.createElement('button');dn.type='button';dn.textContent='▼';dn.setAttribute('aria-label','diminuir');
  c.appendChild(u);c.appendChild(w);c.appendChild(dn);wh.appendChild(c);wins.push(w);
  u.addEventListener('click',function(){wset(i,wv[i]+1)});dn.addEventListener('click',function(){wset(i,wv[i]-1)});
@@ -334,7 +352,7 @@ async function stage2(w,silent){
 async function stage3(m,silent){
  var cs=cand(m);
  for(var i=0;i<cs.length;i++){var t=await dec('mec:'+cs[i],D.mec);
-  if(t){var o=JSON.parse(t);store.s3=m;save();var box=$('o3');box.innerHTML='';
+  if(t){var o=JSON.parse(t);store.s3=m;save();if(silent)c3.open(true);else c3.open();var box=$('o3');box.innerHTML='';
    var n=document.createElement('div');n.className='note';n.innerHTML='<small></small><div></div>';n.firstChild.textContent=o.nota;n.lastChild.textContent=o.bilhete;box.appendChild(n);
    addLog('note',{nota:o.nota,bilhete:o.bilhete});box.appendChild(silent?tg(o.tel):snt(o.tel));
    if(!silent)nextBtn(3,['b3']);return true}}
@@ -345,10 +363,11 @@ async function stage4(){
  if(!who||!door){show('o4',snt('A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM TODAS AS PERGUNTAS STOP LOWE',true));return false}
  var wok=await dec('quem:'+who,D.quem_ok);
  if(!wok){var s=await dec('quem-msg:'+who,D.sus[who]);show('o4',snt(s||'O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
- var mt=await tryTime('morte:',D.morte_ok,c4a.mins());
+ if(T1===null||T2===null){show('o4',snt('A ACUSAÇÃO ESTÁ INCOMPLETA STOP MARQUEM OS DOIS HORÁRIOS NO RELÓGIO STOP LOWE',true));return false}
+ var mt=await tryTime('morte:',D.morte_ok,T1);
  if(mt===null){show('o4',snt('O RELÓGIO NO COLETE DELE NÃO CONCORDA STOP LOWE',true));return false}
  if(door!=='c'){show('o4',snt('A PORTA FOI TRANCADA ÀS DEZ E QUINZE STOP A ESSA HORA O ASSASSINO JÁ ESTAVA EM OUTRO LUGAR STOP LOWE',true));return false}
- var pt=await tryTime('prog:',D.prog_ok,c4b.mins());
+ var pt=await tryTime('prog:',D.prog_ok,T2);
  if(pt===null){show('o4',snt('O DIÁRIO DIZ OUTRA COISA STOP LOWE',true));return false}
  var f=await dec('final:pike|'+mt+'|c|'+pt,D.final);
  if(!f){show('o4',snt('O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
@@ -357,6 +376,9 @@ async function stage4(){
  box.appendChild(snt('SUA ACUSAÇÃO FOI ACEITA STOP O CASO ESTÁ ENCERRADO STOP PODEM ABRIR O ENVELOPE C STOP LOWE'));box.appendChild(e);
  $('f4').classList.add('hide');$('env4').appendChild(env('C'));return true}
 
+function fmt(m){return (Math.floor(m/60)%12===0?12:Math.floor(m/60)%12)+':'+('0'+(m%60)).slice(-2)}
+$('mk1').addEventListener('click',function(){T1=c3.mins();$('chip1').textContent=fmt(T1);c3.close()});
+$('mk2').addEventListener('click',function(){T2=c3.mins();$('chip2').textContent=fmt(T2);c3.close()});
 function bind(id,fn){var b=$(id);b.addEventListener('click',async function(){busy(b,true);try{await fn()}finally{busy(b,false)}})}
 $('handle').addEventListener('click',function(){var h=$('handle');if(h.classList.contains('turn'))return;stage1(wv.slice())});
 $('closeBtn').addEventListener('click',closeSafe);
