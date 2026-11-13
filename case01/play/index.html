@@ -64,17 +64,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 .door.open{transform:rotateY(104deg)}
 .wheels{position:absolute;inset:0;pointer-events:none;z-index:3}
 .wh{position:absolute;top:25.7%;width:8.4%;height:25.7%;outline-offset:3px}
-.wh button{position:absolute;left:0;right:0;height:16%;border:0;background:linear-gradient(180deg,#8a6f36,#4a3a1a);color:#f0dca2;cursor:pointer;font-size:3.2cqw;line-height:1;border-radius:2px;pointer-events:auto;padding:0;box-shadow:0 1px 0 #000}
-.wh button:first-child{top:0}.wh button:last-child{top:84%}
+.wh button{position:absolute;left:8%;right:8%;height:10.5%;border:1px solid #2a2010;background:linear-gradient(180deg,#9a7e40,#5a4720);color:#f0dca2;cursor:pointer;font-size:2.4cqw;line-height:1;border-radius:2px;pointer-events:auto;padding:0;box-shadow:inset 0 1px 0 rgba(255,240,200,.35),0 1px 2px #000}
+.wh button:first-child{top:6.5%}.wh button:last-child{top:62.5%}
 .wh button:active{filter:brightness(1.3)}
 .wh .win{position:absolute;left:0;right:0;top:17.7%;height:43.3%;display:flex;align-items:center;justify-content:center;font:700 8.4cqw 'Old Standard TT',Georgia,serif;color:#efe3c8;text-shadow:0 0 6px rgba(230,207,152,.45);background:rgba(5,4,3,.55);pointer-events:auto}
-.handle{z-index:1;position:absolute;left:48.7%;top:67.7%;width:62.1%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;cursor:pointer;padding:0;transition:transform .9s cubic-bezier(.5,0,.3,1)}
+.handle{z-index:1;position:absolute;left:48.7%;top:72.5%;width:50%;aspect-ratio:1;transform:translate(-50%,-50%);border:0;background:none;cursor:pointer;padding:0;transition:transform 1.4s cubic-bezier(.45,0,.25,1)}
 .handle img{width:100%;height:100%;display:block;pointer-events:none}
 .handle:before{content:"";position:absolute;left:19%;top:19%;width:62%;height:62%;border-radius:50%}
-.handle.turn{transform:translate(-50%,-50%) rotate(90deg)}
+.handle.turn{transform:translate(-50%,-50%) rotate(-360deg)}
 .handle.shake{animation:sk .45s}
 @keyframes sk{0%,100%{transform:translate(-50%,-50%) rotate(0)}20%{transform:translate(-50%,-50%) rotate(-14deg)}45%{transform:translate(-50%,-50%) rotate(11deg)}70%{transform:translate(-50%,-50%) rotate(-6deg)}}
-.hcap{position:absolute;left:0;right:0;top:93%;text-align:center;font:500 2.6cqw Inter,sans-serif;letter-spacing:.3em;color:#a89878;text-transform:uppercase;pointer-events:none}
+.hcap{position:absolute;left:0;right:0;top:95%;text-align:center;font:500 2.4cqw Inter,sans-serif;letter-spacing:.3em;color:#a89878;text-transform:uppercase;pointer-events:none}
 
 /* cadeado */
 .lockwrap{display:flex;justify-content:center;margin-top:12px}
@@ -329,7 +329,7 @@ for(var wi=0;wi<5;wi++)(function(i){
 $('inside').appendChild(env('A'));
 
 /* etapas */
-function openSafe(instant){var h=$('handle'),d=$('door');h.classList.add('turn');$('closeBtn').classList.remove('hide');if(instant){d.style.transition='none';d.classList.add('open');setTimeout(function(){d.style.transition=''},50)}else setTimeout(function(){d.classList.add('open')},850)}
+function openSafe(instant){var h=$('handle'),d=$('door');h.classList.add('turn');$('closeBtn').classList.remove('hide');if(instant){d.style.transition='none';d.classList.add('open');setTimeout(function(){d.style.transition=''},50)}else setTimeout(function(){d.classList.add('open')},1300)}
 function shake(){var h=$('handle');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake')}
 async function stage1(nums,silent){
  if(new Set(nums).size<5){if(!silent){shake();show('o1',snt('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true))}return false}
