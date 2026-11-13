@@ -89,6 +89,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 .epi h3{margin:0 0 10px;font-weight:400;color:var(--gold-hi);font-size:26px}
 .clockbox{display:flex;flex-direction:column;align-items:center;margin-top:6px}
 .clockbox svg{width:min(78vw,300px);height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.zero{margin-top:8px;background:none;border:0;color:var(--mute);font:500 11px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
 .readout{font:500 28px Inter,sans-serif;letter-spacing:.12em;color:var(--gold-hi);margin-top:8px}
 .hintrow{border-top:1px solid var(--line);padding:14px 0}
 .hintrow b{font-weight:400;color:var(--gold-hi);font-size:20px}
@@ -114,8 +115,8 @@ footer a{color:var(--gold-hi)}
 <div class="wheels" id="wheels"></div>
 <button class="handle" id="handle" aria-label="Girar a maçaneta do cofre"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="g1" cx="35%" cy="30%"><stop offset="0" stop-color="#f0dca2"/><stop offset=".6" stop-color="#a98a46"/><stop offset="1" stop-color="#5a4520"/></radialGradient></defs>
 <circle cx="50" cy="50" r="46" fill="#1a150b" stroke="#6e5a30" stroke-width="3"/><g stroke="url(#g1)" stroke-width="9" stroke-linecap="round"><line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/></g><circle cx="50" cy="50" r="13" fill="url(#g1)" stroke="#2a2010"/><circle cx="50" cy="50" r="4" fill="#2a2010"/><circle cx="50" cy="12" r="6" fill="url(#g1)"/><circle cx="50" cy="88" r="6" fill="url(#g1)"/><circle cx="12" cy="50" r="6" fill="url(#g1)"/><circle cx="88" cy="50" r="6" fill="url(#g1)"/></svg></button>
-<div class="hcap">girar</div></div></div>
-<div id="o1"></div></section>
+<div class="hcap" id="hcap">girar</div></div></div>
+<div class="center"><button type="button" class="zero hide" id="closeBtn">Fechar o cofre</button></div><div id="o1"></div></section>
 
 <section class="step locked" id="s2"><h2><span class="n">II.</span></h2>
 <div class="slip"><input type="text" id="i2" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Palavra"></div>
@@ -148,7 +149,7 @@ footer a{color:var(--gold-hi)}
 
 <details class="dicas"><summary>Precisa de uma dica?</summary><div id="hints"></div></details>
 
-<footer>Beyond Suspicion Club · Ultra Suspicionem<br><a href="../../">Voltar ao início</a></footer>
+<footer><button type="button" id="rst" class="zero">Recomeçar do início</button><br><br>Beyond Suspicion Club · Ultra Suspicionem<br><a href="../../">Voltar ao início</a></footer>
 </div>
 <script src="data.js"></script>
 <script>
@@ -205,6 +206,8 @@ function Clock(host){
  var up=function(){drag=null};svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
  draw();
  self.mins=function(){return (self.h%12)*60+self.m};
+ self.reset=function(){self.h=12;self.m=0;draw()};
+ var rb=document.createElement('button');rb.type='button';rb.className='zero';rb.textContent='Zerar o relógio';rb.addEventListener('click',self.reset);host.appendChild(rb);
  return self}
 var c3=Clock($('c3')),c4a=Clock($('c4a')),c4b=Clock($('c4b'));
 function cand(m){return [m,(m+1)%720,(m+719)%720]}
@@ -224,7 +227,7 @@ for(var wi=0;wi<5;wi++)(function(i){
 (function(){var sf=$('safe'),dr=$('door'),ins=sf.querySelector('.inside');function fit(){ins.style.top=0}fit()})();
 
 /* etapas */
-function openSafe(instant){var h=$('handle'),d=$('door');h.classList.add('turn');if(instant){d.style.transition='none';d.classList.add('open');setTimeout(function(){d.style.transition=''},50)}else setTimeout(function(){d.classList.add('open')},850)}
+function openSafe(instant){var h=$('handle'),d=$('door');h.classList.add('turn');$('closeBtn').classList.remove('hide');if(instant){d.style.transition='none';d.classList.add('open');setTimeout(function(){d.style.transition=''},50)}else setTimeout(function(){d.classList.add('open')},850)}
 async function stage1(nums,silent){
  if(new Set(nums).size<5){if(!silent){shake();show('o1',tg('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true))}return false}
  var key='cofre:'+nums.slice().sort(function(a,b){return a-b}).join('-');
@@ -263,7 +266,9 @@ async function stage4(){
  $('f4').classList.add('hide');return true}
 
 function bind(id,fn){var b=$(id);b.addEventListener('click',async function(){busy(b,true);try{await fn()}finally{busy(b,false)}})}
+function closeSafe(){var h=$('handle'),d=$('door');d.classList.remove('open');$('closeBtn').classList.add('hide');setTimeout(function(){h.classList.remove('turn');$('hcap').textContent='girar'},1300)}
 $('handle').addEventListener('click',function(){var h=$('handle');if(h.classList.contains('turn'))return;stage1(wv.slice())});
+$('closeBtn').addEventListener('click',closeSafe);
 bind('b2',function(){return stage2($('i2').value)});
 bind('b3',function(){return stage3(c3.mins())});
 bind('b4',function(){return stage4()});
@@ -283,6 +288,8 @@ D.hints.forEach(function(g){
  $('hints').appendChild(row)});
 
 
+var rst=$('rst');rst.addEventListener('click',function(){if(rst.dataset.a!=='1'){rst.dataset.a='1';rst.textContent='Apagar o progresso? Toque de novo para confirmar';setTimeout(function(){rst.dataset.a='';rst.textContent='Recomeçar do início'},5000);return}
+ try{localStorage.removeItem('bsc1')}catch(e){}store={};location.reload()});
 /* restaurar progresso */
 (async function(){
  try{
