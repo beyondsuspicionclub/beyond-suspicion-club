@@ -26,29 +26,44 @@ h1{font-weight:400;font-size:clamp(34px,7vw,52px);margin:8px 0 0;line-height:1.0
 .step.locked{display:none}
 .step.rev{animation:rv .8s ease both}
 @keyframes rv{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.step.rev{animation:none}}
 .step h2{margin:0;font-weight:400;font-size:26px;display:flex;gap:12px;align-items:baseline}
 .step h2 .n{color:var(--gold);font-size:24px}
+.step h2 .ck{display:none;margin-left:auto;font:500 11px Inter,sans-serif;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.step.done{padding:14px 20px}
+.step.done h2{cursor:pointer;font-size:20px}
+.step.done h2 .ck{display:inline}
+.step.done .body{display:none}
+.step.done.show .body{display:block;margin-top:14px}
 .step p.d{color:var(--mute);margin:8px 0 14px;font-size:16px}
 label{display:block;font:500 12px Inter,sans-serif;letter-spacing:.18em;color:var(--mute);text-transform:uppercase;margin:12px 0 6px}
 input[type=text],select{width:100%;padding:12px 14px;background:#0e0a06;border:1px solid var(--line);color:var(--ivory);font:inherit;font-size:18px;border-radius:0}
 button.go{margin-top:16px;padding:14px 24px;border:0;cursor:pointer;font:500 13px Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#1a1408;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 55%,var(--gold-lo))}
 button.go:disabled{opacity:.5;cursor:default}
+button.nx{background:none;color:var(--gold-hi);border:1px solid var(--gold);padding:14px 28px}
 button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
 .radios label{display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font:400 17px 'Old Standard TT',serif;color:var(--ivory);margin:8px 0;cursor:pointer}
 .radios input{margin-top:6px}
 .center{text-align:center}
+.zero{margin-top:8px;background:none;border:0;color:var(--mute);font:500 11px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+
+/* envelopes pretos */
+.env{position:relative;width:min(100%,250px);aspect-ratio:1.5;margin:0 auto;background:linear-gradient(160deg,#242119,#0a0908);border:1px solid #3d3322;box-shadow:0 10px 24px rgba(0,0,0,.65),inset 0 0 0 4px #0d0b09,inset 0 0 0 5px rgba(196,162,90,.28)}
+.env:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#2d2920,#15120e);clip-path:polygon(0 0,100% 0,50% 60%);box-shadow:0 2px 0 rgba(196,162,90,.35)}
+.env .sl{position:absolute;left:50%;top:60%;width:50px;height:50px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0dca2,#a98a46 60%,#5a4520);display:flex;align-items:center;justify-content:center;font:700 26px 'Old Standard TT',serif;color:#2a2010;box-shadow:0 3px 6px rgba(0,0,0,.6)}
+.env .cs{position:absolute;left:0;right:0;bottom:12%;text-align:center;font:500 10px Inter,sans-serif;letter-spacing:.34em;color:#8a7440}
+.envslot{margin-top:18px;display:flex;justify-content:center}
+.envslot .env{animation:slideup 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes slideup{from{opacity:0;transform:translateY(60px) scale(.9)}to{opacity:1;transform:none}}
 
 /* cofre */
 .safe{margin:18px auto 0;max-width:420px;perspective:1100px;position:relative}
-.inside{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a2218,#050403 75%);border:6px solid #3a2f1a;display:flex;align-items:center;justify-content:center;color:var(--gold-lo);font:500 12px Inter,sans-serif;letter-spacing:.3em}
+.inside{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#2a2218,#050403 75%);border:6px solid #3a2f1a;display:flex;align-items:center;justify-content:center}
+.inside .env{width:62%}
 .door{position:relative;transform-origin:left center;transition:transform 1.5s cubic-bezier(.65,.02,.25,1);transform-style:preserve-3d;padding:18px 16px 20px;border:7px solid #6e5a30;border-radius:4px;
  background:linear-gradient(135deg,#4a4741 0%,#24221e 40%,#34312b 70%,#1b1916 100%);box-shadow:inset 0 0 0 2px #1a150b,inset 0 0 40px rgba(0,0,0,.6),0 14px 30px rgba(0,0,0,.6)}
 .door:before,.door:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e6cf98,#7a6130 70%);box-shadow:0 1px 2px #000}
 .door:before{left:8px;top:8px}.door:after{right:8px;top:8px}
 .door .rv2{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e6cf98,#7a6130 70%);box-shadow:0 1px 2px #000}
-.pp{position:absolute;width:62%;height:46%;background:linear-gradient(135deg,#e9d7aa,#cdb680);box-shadow:0 2px 6px rgba(0,0,0,.6);border-radius:1px}
-.p1{left:14%;top:34%;transform:rotate(-7deg)}.p2{left:22%;top:30%;transform:rotate(4deg);background:linear-gradient(135deg,#d8c08a,#b89d63)}.p3{left:18%;top:38%;transform:rotate(-2deg)}.p4{left:30%;top:46%;width:44%;height:30%;transform:rotate(9deg);background:linear-gradient(135deg,#8a6a3a,#5a4222)}
 .door.open{transform:rotateY(-104deg)}
 .plate{text-align:center;font:700 14px 'Old Standard TT',serif;letter-spacing:.5em;padding-left:.5em;color:var(--gold-hi);border-top:1px solid #6e5a30;border-bottom:1px solid #6e5a30;padding-top:6px;padding-bottom:6px;margin:6px 18px 16px;text-shadow:0 1px 0 #000}
 .wheels{display:flex;justify-content:center;gap:8px}
@@ -62,18 +77,24 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 .handle.shake{animation:sk .45s}
 @keyframes sk{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}45%{transform:rotate(11deg)}70%{transform:rotate(-6deg)}}
 .hcap{text-align:center;font:500 11px Inter,sans-serif;letter-spacing:.3em;color:var(--mute);margin-top:4px;text-transform:uppercase}
-@media (prefers-reduced-motion:reduce){.door{transition:none}.handle{transition:none}.handle.shake{animation:none}}
 
-/* palavra */
-.slip{margin:18px auto 0;max-width:420px}
-.slip input{width:100%;background:#e9d7aa;color:#2a1a0e;border:0;border-bottom:3px double #6b5530;padding:16px 10px 10px;text-align:center;font:400 26px 'Special Elite','Courier New',monospace;letter-spacing:.24em;text-transform:uppercase;box-shadow:0 8px 22px rgba(0,0,0,.5)}
-.slip input:focus-visible{outline:2px solid var(--gold-hi)}
+/* cadeado */
+.lockwrap{display:flex;justify-content:center;margin-top:12px}
+.lockwrap svg{width:150px;height:auto;overflow:visible}
+#shackle{transform-origin:84px 74px;transition:transform .9s cubic-bezier(.4,1.4,.5,1)}
+.lockwrap.open #shackle{transform:translateY(-18px) rotate(32deg)}
+.lockwrap.shake svg{animation:sk2 .45s}
+@keyframes sk2{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px) rotate(-3deg)}60%{transform:translateX(6px) rotate(2deg)}}
+.plateinp{margin:14px auto 0;max-width:340px}
+.plateinp input{width:100%;border:0;text-align:center;padding:14px 10px 12px;font:400 24px 'Special Elite','Courier New',monospace;letter-spacing:.3em;padding-left:calc(10px + .3em);text-transform:uppercase;color:#3a2a0e;background:linear-gradient(180deg,#e2c77d,#b8934a 55%,#d6b866);border-radius:3px;box-shadow:inset 0 2px 3px rgba(255,255,255,.45),inset 0 -3px 5px rgba(80,50,10,.45),0 6px 16px rgba(0,0,0,.55);text-shadow:0 1px 0 rgba(255,240,200,.6)}
+.plateinp input:focus-visible{outline:2px solid var(--gold-hi)}
+@media (prefers-reduced-motion:reduce){.door,.handle,#shackle{transition:none}.handle.shake,.lockwrap.shake svg,.step.rev,.envslot .env,.tg{animation:none}}
 
 /* telegrama no formulário de época */
 .tg{margin-top:20px;container-type:inline-size;box-shadow:0 12px 30px rgba(0,0,0,.6);animation:rv .7s ease both}
 .tg.err{filter:saturate(.8) brightness(.96)}
 .tg .th{position:relative;aspect-ratio:1448/346;background:url(form_top.jpg) center/100% 100% no-repeat}
-.tg .tt{position:absolute;left:23.5%;width:53%;top:48%;height:26%;display:flex;align-items:center;justify-content:center;font:700 calc(100cqw*.036) 'Old Standard TT',serif;letter-spacing:.42em;padding-left:.42em;color:#8a3a22}
+.tg .th svg.ar{position:absolute;inset:0;width:100%;height:100%}
 .tg .bx{position:absolute;top:78%;height:19%;display:flex;align-items:center;justify-content:center;font:400 calc(100cqw*.0165) 'Special Elite','Courier New',monospace;letter-spacing:.08em;color:#3a1a0e;text-transform:uppercase;white-space:nowrap}
 @container (max-width:540px){.tg .bx{display:none}}
 .tg .tb{--lh:max(27px,calc(100cqw*55/1448));position:relative;background:url(form_line.jpg) 0 0/100% var(--lh) repeat-y;padding:calc(var(--lh)*.1) 6.5% 0;min-height:calc(var(--lh)*5)}
@@ -88,8 +109,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 .epi{margin-top:18px;border:1px solid var(--gold);padding:20px 18px;background:#120d08;font-size:18px;line-height:1.6}
 .epi h3{margin:0 0 10px;font-weight:400;color:var(--gold-hi);font-size:26px}
 .clockbox{display:flex;flex-direction:column;align-items:center;margin-top:6px}
-.clockbox svg{width:min(78vw,300px);height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
-.zero{margin-top:8px;background:none;border:0;color:var(--mute);font:500 11px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;text-decoration:underline}
+.clockbox svg{width:min(80vw,310px);height:auto;touch-action:none;user-select:none;-webkit-user-select:none;overflow:visible;filter:drop-shadow(0 12px 18px rgba(0,0,0,.6))}
 .readout{font:500 28px Inter,sans-serif;letter-spacing:.12em;color:var(--gold-hi);margin-top:8px}
 .hintrow{border-top:1px solid var(--line);padding:14px 0}
 .hintrow b{font-weight:400;color:var(--gold-hi);font-size:20px}
@@ -97,9 +117,18 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 .hintrow button{margin-top:10px;background:none;border:1px solid var(--line);color:var(--gold-hi);padding:8px 14px;cursor:pointer;font:500 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase}
 details.dicas{margin-top:34px;border:1px solid var(--line);padding:6px 18px 14px}
 details.dicas summary{cursor:pointer;padding:12px 0;font-size:22px}
-footer{margin:40px 0 50px;text-align:center;color:var(--mute);font-size:14px}
+footer{margin:40px 0 90px;text-align:center;color:var(--mute);font-size:14px}
 footer a{color:var(--gold-hi)}
 .hide{display:none}
+
+/* caixa de telegramas */
+#logbtn{position:fixed;right:14px;bottom:14px;z-index:20;padding:12px 16px;border:1px solid var(--gold);background:rgba(11,8,5,.92);color:var(--gold-hi);font:500 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.6)}
+#ov{position:fixed;inset:0;z-index:30;background:rgba(5,4,3,.96);overflow:auto;padding:20px 0 60px}
+#ov .in{max-width:760px;margin:0 auto;padding:0 20px}
+#ov h3{font-weight:400;font-size:28px;margin:6px 0 0}
+#ov .x{position:sticky;top:0;float:right;margin:-4px 0 0 10px;background:var(--bg);color:var(--gold-hi);border:1px solid var(--gold);padding:10px 14px;font:500 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+#ov .lb{margin:26px 0 -8px;font:500 11px Inter,sans-serif;letter-spacing:.24em;color:var(--mute);text-transform:uppercase}
+#ov .empty{color:var(--mute);margin-top:20px}
 </style>
 </head>
 <body>
@@ -108,41 +137,47 @@ footer a{color:var(--gold-hi)}
 <p class="intro">Aqui as respostas do dossiê chegam ao inspetor Lowe. O Sr. Morrow as leva e traz de volta os telegramas.</p>
 <p class="tgleg">Nos telegramas da época, a palavra STOP fazia o papel do ponto final.</p></header>
 
-<section class="step" id="s1"><h2><span class="n">I.</span>O cofre</h2>
-<div class="safe" id="safe"><div class="inside"><i class="pp p1"></i><i class="pp p2"></i><i class="pp p3"></i><i class="pp p4"></i></div>
+<section class="step" id="s1"><h2><span class="n">I.</span><span>O cofre</span><span class="ck">✓ rever</span></h2><div class="body">
+<div class="safe" id="safe"><div class="inside" id="inside"></div>
 <div class="door" id="door"><span class="rv2" style="left:8px;bottom:8px"></span><span class="rv2" style="right:8px;bottom:8px"></span>
 <div class="plate">COFRE · LOWE</div>
 <div class="wheels" id="wheels"></div>
 <button class="handle" id="handle" aria-label="Girar a maçaneta do cofre"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="g1" cx="35%" cy="30%"><stop offset="0" stop-color="#f0dca2"/><stop offset=".6" stop-color="#a98a46"/><stop offset="1" stop-color="#5a4520"/></radialGradient></defs>
 <circle cx="50" cy="50" r="46" fill="#1a150b" stroke="#6e5a30" stroke-width="3"/><g stroke="url(#g1)" stroke-width="9" stroke-linecap="round"><line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/></g><circle cx="50" cy="50" r="13" fill="url(#g1)" stroke="#2a2010"/><circle cx="50" cy="50" r="4" fill="#2a2010"/><circle cx="50" cy="12" r="6" fill="url(#g1)"/><circle cx="50" cy="88" r="6" fill="url(#g1)"/><circle cx="12" cy="50" r="6" fill="url(#g1)"/><circle cx="88" cy="50" r="6" fill="url(#g1)"/></svg></button>
 <div class="hcap" id="hcap">girar</div></div></div>
-<div class="center"><button type="button" class="zero hide" id="closeBtn">Fechar o cofre</button></div><div id="o1"></div></section>
+<div class="center"><button type="button" class="zero hide" id="closeBtn">Fechar o cofre</button></div>
+<div id="o1"></div><div class="center" id="n1"></div></div></section>
 
-<section class="step locked" id="s2"><h2><span class="n">II.</span></h2>
-<div class="slip"><input type="text" id="i2" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Palavra"></div>
-<div class="center"><button class="go" id="b2">Telegrafar</button></div><div id="o2"></div></section>
+<section class="step locked" id="s2"><h2><span class="n">II.</span><span>O cadeado</span><span class="ck">✓ rever</span></h2><div class="body">
+<div class="lockwrap" id="lockwrap"><svg viewBox="0 0 120 150" aria-hidden="true"><defs><linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0dca2"/><stop offset=".45" stop-color="#b08a3e"/><stop offset="1" stop-color="#5f4720"/></linearGradient><linearGradient id="sg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a9a9a"/><stop offset=".5" stop-color="#e8e8e8"/><stop offset="1" stop-color="#7d7d7d"/></linearGradient></defs>
+<path id="shackle" d="M36,74 V46 a24,24 0 0 1 48,0 V74" fill="none" stroke="url(#sg)" stroke-width="10" stroke-linecap="round"/>
+<rect x="18" y="70" width="84" height="70" rx="10" fill="url(#bg2)" stroke="#3a2a0e" stroke-width="2"/><rect x="25" y="77" width="70" height="56" rx="6" fill="none" stroke="rgba(60,40,10,.55)" stroke-width="1.5"/>
+<circle cx="60" cy="100" r="9" fill="#1a1208"/><path d="M55,103 h10 l3,20 h-16 z" fill="#1a1208"/><ellipse cx="42" cy="84" rx="14" ry="5" fill="rgba(255,255,255,.28)"/></svg></div>
+<div class="plateinp"><input type="text" id="i2" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Palavra"></div>
+<div class="center"><button class="go" id="b2">Abrir</button></div>
+<div class="envslot" id="env2"></div><div id="o2"></div><div class="center" id="n2"></div></div></section>
 
-<section class="step locked" id="s3"><h2><span class="n">III.</span></h2>
+<section class="step locked" id="s3"><h2><span class="n">III.</span><span>O relógio</span><span class="ck">✓ rever</span></h2><div class="body">
 <div class="clockbox" id="c3"></div>
-<div class="center"><button class="go" id="b3">Telegrafar</button></div><div id="o3"></div></section>
+<div class="center"><button class="go" id="b3">Telegrafar</button></div><div id="o3"></div><div class="center" id="n3"></div></div></section>
 
-<section class="step locked" id="s4"><h2><span class="n">IV.</span>A acusação</h2>
-<p class="d">Responda às três perguntas. O inspetor só aceita a acusação completa.</p>
+<section class="step locked" id="s4"><h2><span class="n">IV.</span><span>A acusação</span><span class="ck">✓ rever</span></h2><div class="body">
+<p class="d">Responda às perguntas. O inspetor só aceita a acusação completa.</p>
 <div id="f4">
 <label for="q1">Quem matou Ambrose Vale?</label>
 <select id="q1"><option value="">Escolha um nome…</option><option value="reed">Thomas Reed</option><option value="harriet">Harriet Vale</option><option value="pike">Cornelius Pike</option><option value="ashby">Dr. Ashby</option><option value="pratt">Agnes Pratt</option><option value="dobbs">Joseph Dobbs</option><option value="finch">Samuel Finch</option><option value="hargreaves">William Hargreaves</option></select>
 <label>A que horas ele morreu?</label><div class="clockbox" id="c4a"></div>
-<label>Como a porta da oficina foi trancada?</label>
+<label>Como a porta da oficina ficou trancada?</label>
 <div class="radios" id="q3">
-<label><input type="radio" name="porta" value="a"> (a) Ambrose se trancou e morreu depois.</label>
-<label><input type="radio" name="porta" value="b"> (b) O assassino saiu por outra via.</label>
-<label><input type="radio" name="porta" value="c"> (c) Alguém ajustou a fechadura para trancar sozinha depois que ele saiu.</label>
-<label><input type="radio" name="porta" value="d"> (d) A porta foi trancada por quem estava lá dentro às 23h.</label></div>
-<div id="q4" class="hide"><label>A que horas Vale programou a fechadura?</label><div class="clockbox" id="c4b"></div></div>
+<label><input type="radio" name="porta" value="a"> (a) Ambrose girou a chave por dentro e morreu logo depois.</label>
+<label><input type="radio" name="porta" value="b"> (b) Alguém girou a chave por fora e a levou embora.</label>
+<label><input type="radio" name="porta" value="c"> (c) O ferrolho correu sozinho, na hora que o mecanismo marcava.</label>
+<label><input type="radio" name="porta" value="d"> (d) Alguém forçou a porta por fora e o ferrolho caiu no lugar.</label></div>
+<label>E a que horas Vale regulou a fechadura?</label><div class="clockbox" id="c4b"></div>
 <div class="center"><button class="go" id="b4">Enviar ao inspetor</button></div></div>
-<div id="o4"></div></section>
+<div id="o4"></div><div class="envslot" id="env4"></div></div></section>
 
-<section class="step locked" id="sb"><h2><span class="n">★</span>Pergunta bônus</h2>
+<section class="step locked" id="sb"><h2><span class="n">★</span><span>Pergunta bônus</span></h2>
 <p class="d">Quem é o cliente sem rosto?</p>
 <input type="text" id="ib" autocomplete="off" aria-label="resposta bônus">
 <button class="go" id="bb">Enviar ao inspetor</button><div id="ob"></div></section>
@@ -151,6 +186,8 @@ footer a{color:var(--gold-hi)}
 
 <footer><button type="button" id="rst" class="zero">Recomeçar do início</button><br><br>Beyond Suspicion Club · Ultra Suspicionem<br><a href="../../">Voltar ao início</a></footer>
 </div>
+<button id="logbtn" class="hide" type="button">✉ Telegramas <span id="logn">0</span></button>
+<div id="ov" class="hide" role="dialog" aria-label="Telegramas recebidos"><div class="in"><button class="x" id="ovx" type="button">Fechar</button><h3>Telegramas recebidos</h3><div id="ovl"></div></div></div>
 <script src="data.js"></script>
 <script>
 (function(){
@@ -164,38 +201,84 @@ async function dec(secret,blob){
  var k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:D.it,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
  var p=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},k,ct);return td.decode(p)}catch(e){return null}}
 var store={};try{store=JSON.parse(localStorage.getItem('bsc1')||'{}')}catch(e){}
+store.log=store.log||[];
 function save(){try{localStorage.setItem('bsc1',JSON.stringify(store))}catch(e){}}
-var BOX=[['3%','17.7%','CLERKENWELL'],['21.1%','19.4%','INSP. LOWE'],['40.7%','18.5%','VIA M.'],['59.5%','19.5%','URGENTE'],['79.4%','18%','Nº ']];
+
+/* telegrama */
+var BOX=[['3%','17.7%','CLERKENWELL'],['21.1%','19.4%','INSP. LOWE'],['40.7%','18.5%','VIA M.'],['59.5%','19.5%','URGENTE'],['79.4%','18%','']];
 function tg(txt,err){var d=document.createElement('div');d.className='tg'+(err?' err':'');
- var th=document.createElement('div');th.className='th';var t=document.createElement('div');t.className='tt';t.textContent='TELEGRAMA';th.appendChild(t);
- BOX.forEach(function(b,i){var x=document.createElement('div');x.className='bx';x.style.left=b[0];x.style.width=b[1];x.textContent=i===4?'Nº '+Math.floor(100+Math.random()*800):b[2];th.appendChild(x)});
+ var th=document.createElement('div');th.className='th';
+ th.innerHTML='<svg class="ar" viewBox="0 0 1448 346" aria-hidden="true"><defs><path id="bp'+Math.random().toString(36).slice(2,7)+'" d="M 405,203 Q 724,246 1043,203"/></defs></svg>';
+ var svg=th.firstChild,pid=svg.querySelector('path').id,tx0=document.createElementNS('http://www.w3.org/2000/svg','text');
+ tx0.setAttribute('font-family','Old Standard TT,serif');tx0.setAttribute('font-weight','700');tx0.setAttribute('font-size','40');tx0.setAttribute('letter-spacing','18');tx0.setAttribute('fill','#8a3a22');tx0.setAttribute('text-anchor','middle');
+ var tp=document.createElementNS('http://www.w3.org/2000/svg','textPath');tp.setAttributeNS('http://www.w3.org/1999/xlink','href','#'+pid);tp.setAttribute('href','#'+pid);tp.setAttribute('startOffset','50%');tp.textContent='TELEGRAMA';tx0.appendChild(tp);svg.appendChild(tx0);
+ BOX.forEach(function(b,i){var x=document.createElement('div');x.className='bx';x.style.left=b[0];x.style.width=b[1];x.textContent=i===4?'Nº '+(100+(txt.length*37+i*11)%800):b[2];th.appendChild(x)});
  var tb=document.createElement('div');tb.className='tb';var tx=document.createElement('div');tx.className='tx';tx.textContent=txt;tb.appendChild(tx);
  if(!err){var rc=document.createElement('div');rc.className='rc';rc.textContent='RECEBIDO';tb.appendChild(rc)}
  var tf=document.createElement('div');tf.className='tf';tf.innerHTML='<span class="l">RETRANSMITIDO POR M.</span><span class="r">CLERKENWELL</span>';
  d.appendChild(th);d.appendChild(tb);d.appendChild(tf);return d}
+var quiet=false;
+function addLog(k,t,e){if(quiet)return;store.log.push({k:k,t:t,e:!!e});if(store.log.length>80)store.log.shift();save();updLog()}
+function snt(txt,err){addLog('tg',txt,err);return tg(txt,err)}
+function updLog(){$('logn').textContent=store.log.length;$('logbtn').classList.toggle('hide',!store.log.length)}
+function renderLog(){var l=$('ovl');l.innerHTML='';if(!store.log.length){l.innerHTML='<p class="empty">Nenhum telegrama ainda.</p>';return}
+ var n=0;store.log.forEach(function(x){var lb=document.createElement('div');lb.className='lb';
+  if(x.k==='tg'){n++;lb.textContent='Telegrama '+n+(x.e?' · resposta não aceita':'');l.appendChild(lb);l.appendChild(tg(x.t,x.e))}
+  else{lb.textContent='Bilhete de Morrow';l.appendChild(lb);var nt=document.createElement('div');nt.className='note';nt.innerHTML='<small></small><div></div>';nt.firstChild.textContent=x.t.nota;nt.lastChild.textContent=x.t.bilhete;l.appendChild(nt)}})}
+$('logbtn').addEventListener('click',function(){renderLog();$('ov').classList.remove('hide');document.body.style.overflow='hidden'});
+function closeOv(){$('ov').classList.add('hide');document.body.style.overflow=''}
+$('ovx').addEventListener('click',closeOv);document.addEventListener('keydown',function(e){if(e.key==='Escape')closeOv()});
+
 function show(id,node,keep){var o=$(id);if(!keep)o.innerHTML='';o.appendChild(node)}
-function unlock(n){document.querySelectorAll('.hintrow').forEach(function(r){if(+r.dataset.need<=n-1)r.classList.remove('hide')});var s=$('s'+n);s.classList.remove('locked');s.classList.add('rev');if(n===4){var sb=$('sb');sb.classList.remove('locked');sb.classList.add('rev')}}
+function revealHints(n){document.querySelectorAll('.hintrow').forEach(function(r){if(+r.dataset.need<=n-1)r.classList.remove('hide')})}
+function unlock(n){revealHints(n);var s=$('s'+n);s.classList.remove('locked');s.classList.add('rev');if(n===4){var sb=$('sb');sb.classList.remove('locked');sb.classList.add('rev')}}
+function markDone(n){var s=$('s'+n);s.classList.add('done');s.classList.remove('show')}
+document.querySelectorAll('.step h2').forEach(function(h){h.addEventListener('click',function(){var s=h.parentNode;if(s.classList.contains('done'))s.classList.toggle('show')})});
+function nextBtn(n,hideSel){/* some controles, mostra Próximo */
+ revealHints(n+1);
+ hideSel.forEach(function(id){var e=$(id);if(e)e.classList.add('hide')});
+ var box=$('n'+n);box.innerHTML='';var b=document.createElement('button');b.type='button';b.className='go nx';b.textContent='Próximo';
+ b.addEventListener('click',function(){box.innerHTML='';markDone(n);unlock(n+1);var t=$('s'+(n+1));setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})},120)});box.appendChild(b)}
 function busy(b,on){b.disabled=on;if(b.dataset.l===undefined)b.dataset.l=b.textContent;b.textContent=on?'Enviando…':b.dataset.l}
 var ZERO=['NENHUM','UM','DOIS','TRÊS','QUATRO'];
+function env(letter,sub){var e=document.createElement('div');e.className='env';e.innerHTML='<div class="sl"></div><div class="cs">CASO Nº 01</div>';e.querySelector('.sl').textContent=letter;e.setAttribute('role','img');e.setAttribute('aria-label','Envelope '+letter);return e}
 
-/* clock */
+/* relógio de bolso */
 function Clock(host){
- var self={h:12,m:0},NS='http://www.w3.org/2000/svg',cx=150,cy=150;
- var svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 300 300');svg.setAttribute('role','img');svg.setAttribute('aria-label','Relógio de bolso. Arraste os ponteiros.');
- var s='<circle cx="150" cy="150" r="142" fill="#e9d9b2" stroke="#9c7d3f" stroke-width="8"/><circle cx="150" cy="150" r="130" fill="none" stroke="#2a2014" stroke-width="1"/>';
+ var self={h:12,m:0},NS='http://www.w3.org/2000/svg',cx=150,cy=176,uid=Math.random().toString(36).slice(2,6);
+ var svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 300 336');svg.setAttribute('role','img');svg.setAttribute('aria-label','Relógio de bolso. Arraste os ponteiros.');
  var R=['XII','I','II','III','IV','V','VI','VII','VIII','IX','X','XI'];
- for(var i=0;i<12;i++){var a=i*30*Math.PI/180,x=150+Math.sin(a)*106,y=150-Math.cos(a)*106;
-  s+='<text x="'+x.toFixed(1)+'" y="'+(y+6).toFixed(1)+'" text-anchor="middle" font-family="Old Standard TT,serif" font-size="'+(R[i].length>2?15:19)+'" fill="#2a2014">'+R[i]+'</text>'}
- for(var j=0;j<60;j++){var b=j*6*Math.PI/180,l=j%5?4:8;s+='<line x1="'+(150+Math.sin(b)*(126-l)).toFixed(1)+'" y1="'+(150-Math.cos(b)*(126-l)).toFixed(1)+'" x2="'+(150+Math.sin(b)*126).toFixed(1)+'" y2="'+(150-Math.cos(b)*126).toFixed(1)+'" stroke="#2a2014" stroke-width="'+(j%5?1:2)+'"/>'}
- s+='<g id="hh"><line x1="150" y1="162" x2="150" y2="80" stroke="#2a2014" stroke-width="7" stroke-linecap="round"/></g><g id="mh"><line x1="150" y1="166" x2="150" y2="36" stroke="#2a2014" stroke-width="4" stroke-linecap="round"/></g><circle cx="150" cy="150" r="7" fill="#9c7d3f" stroke="#2a2014"/>';
- s+='<line id="hhit" x1="150" y1="150" x2="150" y2="82" stroke="transparent" stroke-width="34" style="cursor:grab"/><line id="mhit" x1="150" y1="72" x2="150" y2="34" stroke="transparent" stroke-width="26" style="cursor:grab"/>';
+ var s='<defs><linearGradient id="gb'+uid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbeab0"/><stop offset=".35" stop-color="#c79f4a"/><stop offset=".65" stop-color="#8d6a28"/><stop offset="1" stop-color="#e3c374"/></linearGradient>'
+ +'<radialGradient id="gd'+uid+'" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#fbf4de"/><stop offset=".7" stop-color="#eadbb2"/><stop offset="1" stop-color="#d3bd8a"/></radialGradient>'
+ +'<linearGradient id="gh'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.55)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/></linearGradient>'
+ +'<clipPath id="cp'+uid+'"><circle cx="'+cx+'" cy="'+cy+'" r="124"/></clipPath></defs>';
+ /* argola e coroa */
+ s+='<circle cx="150" cy="22" r="17" fill="none" stroke="url(#gb'+uid+')" stroke-width="7"/><rect x="138" y="34" width="24" height="22" rx="3" fill="url(#gb'+uid+')" stroke="#4a3512"/><g stroke="#4a3512" stroke-width="1.2"><line x1="142" y1="36" x2="142" y2="54"/><line x1="147" y1="36" x2="147" y2="54"/><line x1="153" y1="36" x2="153" y2="54"/><line x1="158" y1="36" x2="158" y2="54"/></g><rect x="134" y="52" width="32" height="10" rx="3" fill="url(#gb'+uid+')" stroke="#4a3512"/>';
+ /* caixa */
+ s+='<circle cx="'+cx+'" cy="'+cy+'" r="148" fill="url(#gb'+uid+')" stroke="#3a2a0e" stroke-width="2"/><circle cx="'+cx+'" cy="'+cy+'" r="138" fill="none" stroke="rgba(60,40,10,.7)" stroke-width="2"/><circle cx="'+cx+'" cy="'+cy+'" r="133" fill="#f6edd0" stroke="#6b5226" stroke-width="2"/>';
+ s+='<circle id="face'+uid+'" cx="'+cx+'" cy="'+cy+'" r="128" fill="url(#gd'+uid+')"/>';
+ s+='<g id="bi'+uid+'">';
+ s+='<circle cx="'+cx+'" cy="'+cy+'" r="116" fill="none" stroke="#2a2014" stroke-width="1"/><circle cx="'+cx+'" cy="'+cy+'" r="92" fill="none" stroke="rgba(42,32,20,.45)" stroke-width="1"/>';
+ for(var j=0;j<60;j++){var b=j*6*Math.PI/180,l=j%5?4:9;s+='<line x1="'+(cx+Math.sin(b)*(116-l)).toFixed(1)+'" y1="'+(cy-Math.cos(b)*(116-l)).toFixed(1)+'" x2="'+(cx+Math.sin(b)*116).toFixed(1)+'" y2="'+(cy-Math.cos(b)*116).toFixed(1)+'" stroke="#2a2014" stroke-width="'+(j%5?.9:2)+'"/>'}
+ for(var i=0;i<12;i++){var a=i*30*Math.PI/180,x=cx+Math.sin(a)*98,y=cy-Math.cos(a)*98;
+  s+='<text x="'+x.toFixed(1)+'" y="'+(y+6).toFixed(1)+'" text-anchor="middle" font-family="Old Standard TT,serif" font-weight="700" font-size="'+(R[i].length>2?14:18)+'" fill="#241a0e">'+R[i]+'</text>'}
+ s+='<text x="150" y="'+(cy-52)+'" text-anchor="middle" font-family="Old Standard TT,serif" font-size="8" letter-spacing="3" fill="#6b5226">B.S.C. · LONDON</text>';
+ s+='<circle cx="150" cy="'+(cy+50)+'" r="22" fill="none" stroke="rgba(42,32,20,.6)" stroke-width="1"/>';
+ for(var k=0;k<12;k++){var c=k*30*Math.PI/180;s+='<line x1="'+(150+Math.sin(c)*18).toFixed(1)+'" y1="'+(cy+50-Math.cos(c)*18).toFixed(1)+'" x2="'+(150+Math.sin(c)*22).toFixed(1)+'" y2="'+(cy+50-Math.cos(c)*22).toFixed(1)+'" stroke="rgba(42,32,20,.6)"/>'}
+ s+='<line x1="150" y1="'+(cy+50)+'" x2="150" y2="'+(cy+34)+'" stroke="#7a2a1a" stroke-width="1.2"/>';
+ s+='</g>';
+ /* ponteiros de aço azulado */
+ s+='<g id="hh'+uid+'" style="filter:drop-shadow(1px 2px 1.5px rgba(0,0,0,.45))"><path d="M150,'+(cy+14)+' L146.5,'+(cy+2)+' L148,'+(cy-34)+' a8,8 0 1 1 4,0 L153.5,'+(cy+2)+' Z" fill="#1d2233" stroke="#0c0f18" stroke-width=".6"/><circle cx="150" cy="'+(cy-46)+'" r="4.6" fill="#eadbb2" stroke="#1d2233" stroke-width="2"/><path d="M150,'+(cy-52)+' L147,'+(cy-66)+' L150,'+(cy-76)+' L153,'+(cy-66)+' Z" fill="#1d2233"/></g>';
+ s+='<g id="mh'+uid+'" style="filter:drop-shadow(1px 2px 1.5px rgba(0,0,0,.45))"><path d="M150,'+(cy+18)+' L148.2,'+(cy+4)+' L149.2,'+(cy-86)+' L150,'+(cy-110)+' L150.8,'+(cy-86)+' L151.8,'+(cy+4)+' Z" fill="#1d2233" stroke="#0c0f18" stroke-width=".5"/><circle cx="150" cy="'+(cy-74)+'" r="3.4" fill="#eadbb2" stroke="#1d2233" stroke-width="1.8"/></g>';
+ s+='<circle cx="150" cy="'+cy+'" r="6" fill="#1d2233"/><circle cx="150" cy="'+cy+'" r="2.4" fill="#c79f4a"/>';
+ s+='<g clip-path="url(#cp'+uid+')"><ellipse cx="120" cy="'+(cy-66)+'" rx="86" ry="52" fill="url(#gh'+uid+')" transform="rotate(-24 120 '+(cy-66)+')" opacity=".55"/></g>';
+ s+='<line id="hhit'+uid+'" x1="150" y1="'+cy+'" x2="150" y2="'+(cy-68)+'" stroke="transparent" stroke-width="34" style="cursor:grab"/><line id="mhit'+uid+'" x1="150" y1="'+(cy-78)+'" x2="150" y2="'+(cy-112)+'" stroke="transparent" stroke-width="28" style="cursor:grab"/>';
  svg.innerHTML=s;host.appendChild(svg);
  var out=document.createElement('div');out.className='readout';host.appendChild(out);
- var hh=svg.querySelector('#hh'),mh=svg.querySelector('#mh'),hhit=svg.querySelector('#hhit'),mhit=svg.querySelector('#mhit');
- function draw(){var ha=((self.h%12)+self.m/60)*30,ma=self.m*6;
-  hh.setAttribute('transform','rotate('+ha+' 150 150)');mhit.setAttribute('transform','rotate('+ma+' 150 150)');hhit.setAttribute('transform','rotate('+ha+' 150 150)');mh.setAttribute('transform','rotate('+ma+' 150 150)');
-  out.textContent=(self.h%12===0?12:self.h%12)+':'+(self.m<10?'0':'')+self.m}
- function ang(e){var r=svg.getBoundingClientRect(),x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2);var a=Math.atan2(x,-y)*180/Math.PI;return a<0?a+360:a}
+ var hh=svg.querySelector('#hh'+uid),mh=svg.querySelector('#mh'+uid),hhit=svg.querySelector('#hhit'+uid),mhit=svg.querySelector('#mhit'+uid);
+ function rot(e,a){e.setAttribute('transform','rotate('+a+' 150 '+cy+')')}
+ function draw(){var ha=((self.h%12)+self.m/60)*30,ma=self.m*6;rot(hh,ha);rot(hhit,ha);rot(mh,ma);rot(mhit,ma);out.textContent=(self.h%12===0?12:self.h%12)+':'+(self.m<10?'0':'')+self.m}
+ function ang(e){var r=svg.getBoundingClientRect(),x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height*cy/336);var a=Math.atan2(x,-y)*180/Math.PI;return a<0?a+360:a}
  var drag=null;
  function down(w){return function(e){drag=w;try{svg.setPointerCapture(e.pointerId)}catch(x){}e.preventDefault()}}
  mhit.addEventListener('pointerdown',down('m'));hhit.addEventListener('pointerdown',down('h'));
@@ -204,6 +287,8 @@ function Clock(host){
   else{var hv=a/30-self.m/60;self.h=((Math.round(hv)%12)+12)%12}
   draw();e.preventDefault()});
  var up=function(){drag=null};svg.addEventListener('pointerup',up);svg.addEventListener('pointercancel',up);
+ /* mostrador opcional feito por IA: relogio_face.png (sem ponteiros, 12 no topo) */
+ var im=new Image();im.onload=function(){var el=document.createElementNS(NS,'image');el.setAttribute('href','relogio_face.png');el.setAttribute('x',cx-128);el.setAttribute('y',cy-128);el.setAttribute('width',256);el.setAttribute('height',256);el.setAttribute('clip-path','url(#cp'+uid+')');svg.querySelector('#bi'+uid).replaceWith(el)};im.src='relogio_face.png';
  draw();
  self.mins=function(){return (self.h%12)*60+self.m};
  self.reset=function(){self.h=12;self.m=0;draw()};
@@ -211,7 +296,6 @@ function Clock(host){
  return self}
 var c3=Clock($('c3')),c4a=Clock($('c4a')),c4b=Clock($('c4b'));
 function cand(m){return [m,(m+1)%720,(m+719)%720]}
-
 
 /* cofre na tela */
 var wv=[1,1,1,1,1],MAXN=18,wh=$('wheels'),wins=[];
@@ -224,57 +308,63 @@ for(var wi=0;wi<5;wi++)(function(i){
  c.addEventListener('keydown',function(e){if(e.key==='ArrowUp'){wset(i,wv[i]+1);e.preventDefault()}else if(e.key==='ArrowDown'){wset(i,wv[i]-1);e.preventDefault()}});
  w.addEventListener('wheel',function(e){wset(i,wv[i]+(e.deltaY<0?1:-1));e.preventDefault()},{passive:false});
  wset(i,1)})(wi);
-(function(){var sf=$('safe'),dr=$('door'),ins=sf.querySelector('.inside');function fit(){ins.style.top=0}fit()})();
+$('inside').appendChild(env('A'));
 
 /* etapas */
 function openSafe(instant){var h=$('handle'),d=$('door');h.classList.add('turn');$('closeBtn').classList.remove('hide');if(instant){d.style.transition='none';d.classList.add('open');setTimeout(function(){d.style.transition=''},50)}else setTimeout(function(){d.classList.add('open')},850)}
+function shake(){var h=$('handle');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake')}
 async function stage1(nums,silent){
- if(new Set(nums).size<5){if(!silent){shake();show('o1',tg('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true))}return false}
+ if(new Set(nums).size<5){if(!silent){shake();show('o1',snt('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true))}return false}
  var key='cofre:'+nums.slice().sort(function(a,b){return a-b}).join('-');
  var t=await dec(key,D.cofre);
- if(t){store.s1=nums;save();openSafe(silent);if(silent){show('o1',tg(t));unlock(2)}else{setTimeout(function(){show('o1',tg(t));unlock(2)},1500)}return true}
+ if(t){store.s1=nums;save();openSafe(silent);
+  if(silent){show('o1',tg(t))}else{setTimeout(function(){show('o1',snt(t));nextBtn(1,[])},1500)}return true}
  var hs=await Promise.all(nums.map(function(n){return sha('n:'+n)})),c=hs.filter(function(h){return D.cofre_h.indexOf(h)>=0}).length;
- if(!silent){shake();show('o1',tg(c===0?'O COFRE NÃO ABRIU STOP NENHUM DOS CINCO NÚMEROS CONFERE STOP LOWE':'O COFRE NÃO ABRIU STOP SE EU PUDESSE CONFERIR O QUE ESTÁ ERRADO STOP POR ENQUANTO POSSO DIZER QUE '+ZERO[c]+' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',true))}
+ if(!silent){shake();show('o1',snt(c===0?'O COFRE NÃO ABRIU STOP NENHUM DOS CINCO NÚMEROS CONFERE STOP LOWE':'O COFRE NÃO ABRIU STOP SE EU PUDESSE CONFERIR O QUE ESTÁ ERRADO STOP POR ENQUANTO POSSO DIZER QUE '+ZERO[c]+' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',true))}
  return false}
-function shake(){var h=$('handle');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake')}
-function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z]/g,'')}
+function closeSafe(){var h=$('handle'),d=$('door');d.classList.remove('open');$('closeBtn').classList.add('hide');setTimeout(function(){h.classList.remove('turn')},1300)}
+function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z]/g,'')}
 async function stage2(w,silent){
  var t=await dec('palavra:'+norm(w),D.palavra);
- if(t){store.s2=w;save();show('o2',tg(t));unlock(3);return true}
- if(!silent)show('o2',tg('NADA ENCONTRADO ONDE INDICARAM STOP TENTEM OUTRA PALAVRA STOP LOWE',true));return false}
+ var lw=$('lockwrap');
+ if(t){store.s2=w;save();lw.classList.add('open');
+  if(silent){$('env2').innerHTML='';$('env2').appendChild(env('B'));show('o2',tg(t))}
+  else{setTimeout(function(){$('env2').innerHTML='';$('env2').appendChild(env('B'))},900);setTimeout(function(){show('o2',snt(t));nextBtn(2,['b2'])},1700)}return true}
+ if(!silent){lw.classList.remove('shake');void lw.offsetWidth;lw.classList.add('shake');show('o2',snt('NADA ENCONTRADO ONDE INDICARAM STOP TENTEM OUTRA PALAVRA STOP LOWE',true))}return false}
 async function stage3(m,silent){
  var cs=cand(m);
  for(var i=0;i<cs.length;i++){var t=await dec('mec:'+cs[i],D.mec);
   if(t){var o=JSON.parse(t);store.s3=m;save();var box=$('o3');box.innerHTML='';
-   var n=document.createElement('div');n.className='note';n.innerHTML='<small></small><div></div>';n.firstChild.textContent=o.nota;n.lastChild.textContent=o.bilhete;box.appendChild(n);box.appendChild(tg(o.tel));unlock(4);return true}}
- if(!silent)show('o3',tg('ESSA NÃO PARECE A HORA PROGRAMADA STOP LOWE',true));return false}
+   var n=document.createElement('div');n.className='note';n.innerHTML='<small></small><div></div>';n.firstChild.textContent=o.nota;n.lastChild.textContent=o.bilhete;box.appendChild(n);
+   addLog('note',{nota:o.nota,bilhete:o.bilhete});box.appendChild(silent?tg(o.tel):snt(o.tel));
+   if(!silent)nextBtn(3,['b3']);return true}}
+ if(!silent)show('o3',snt('ESSA NÃO PARECE A HORA PROGRAMADA STOP LOWE',true));return false}
 async function tryTime(prefix,blob,m){var cs=cand(m);for(var i=0;i<cs.length;i++){var t=await dec(prefix+cs[i],blob);if(t)return cs[i]}return null}
 async function stage4(){
  var who=$('q1').value,r=document.querySelector('input[name=porta]:checked'),door=r&&r.value;
- if(!who||!door){show('o4',tg('A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM AS TRÊS PERGUNTAS STOP LOWE',true));return false}
+ if(!who||!door){show('o4',snt('A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM TODAS AS PERGUNTAS STOP LOWE',true));return false}
  var wok=await dec('quem:'+who,D.quem_ok);
- if(!wok){var s=await dec('quem-msg:'+who,D.sus[who]);show('o4',tg(s||'O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
+ if(!wok){var s=await dec('quem-msg:'+who,D.sus[who]);show('o4',snt(s||'O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
  var mt=await tryTime('morte:',D.morte_ok,c4a.mins());
- if(mt===null){show('o4',tg('O RELÓGIO NO COLETE DELE NÃO CONCORDA STOP LOWE',true));return false}
- if(door!=='c'){show('o4',tg('A PORTA FOI TRANCADA ÀS DEZ E QUINZE STOP A ESSA HORA O ASSASSINO JÁ ESTAVA EM OUTRO LUGAR STOP LOWE',true));return false}
+ if(mt===null){show('o4',snt('O RELÓGIO NO COLETE DELE NÃO CONCORDA STOP LOWE',true));return false}
+ if(door!=='c'){show('o4',snt('A PORTA FOI TRANCADA ÀS DEZ E QUINZE STOP A ESSA HORA O ASSASSINO JÁ ESTAVA EM OUTRO LUGAR STOP LOWE',true));return false}
  var pt=await tryTime('prog:',D.prog_ok,c4b.mins());
- if(pt===null){show('o4',tg('O DIÁRIO DIZ OUTRA COISA STOP LOWE',true));return false}
+ if(pt===null){show('o4',snt('O DIÁRIO DIZ OUTRA COISA STOP LOWE',true));return false}
  var f=await dec('final:pike|'+mt+'|c|'+pt,D.final);
- if(!f){show('o4',tg('O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
+ if(!f){show('o4',snt('O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
  store.s4=1;save();
- var box=$('o4');box.innerHTML='';var e=document.createElement('div');e.className='epi';e.innerHTML='<h3>Caso encerrado</h3><div></div>';e.lastChild.textContent=f;box.appendChild(tg('ACUSAÇÃO CONFIRMADA STOP PARABÉNS STOP LOWE'));box.appendChild(e);
- $('f4').classList.add('hide');return true}
+ var box=$('o4');box.innerHTML='';var e=document.createElement('div');e.className='epi';e.innerHTML='<h3>Caso encerrado</h3><div></div>';e.lastChild.textContent=f;
+ box.appendChild(snt('SUA ACUSAÇÃO FOI ACEITA STOP O CASO ESTÁ ENCERRADO STOP PODEM ABRIR O ENVELOPE C STOP LOWE'));box.appendChild(e);
+ $('f4').classList.add('hide');$('env4').appendChild(env('C'));return true}
 
 function bind(id,fn){var b=$(id);b.addEventListener('click',async function(){busy(b,true);try{await fn()}finally{busy(b,false)}})}
-function closeSafe(){var h=$('handle'),d=$('door');d.classList.remove('open');$('closeBtn').classList.add('hide');setTimeout(function(){h.classList.remove('turn');$('hcap').textContent='girar'},1300)}
 $('handle').addEventListener('click',function(){var h=$('handle');if(h.classList.contains('turn'))return;stage1(wv.slice())});
 $('closeBtn').addEventListener('click',closeSafe);
 bind('b2',function(){return stage2($('i2').value)});
 bind('b3',function(){return stage3(c3.mins())});
 bind('b4',function(){return stage4()});
-bind('bb',async function(){if(!$('ib').value.trim()){show('ob',tg('ENVIE ALGUMA RESPOSTA STOP LOWE',true));return}show('ob',tg(D.bonus))});
+bind('bb',async function(){if(!$('ib').value.trim()){show('ob',snt('ENVIE ALGUMA RESPOSTA STOP LOWE',true));return}show('ob',snt(D.bonus))});
 $('i2').addEventListener('keydown',function(e){if(e.key==='Enter')$('b2').click()});
-document.querySelectorAll('input[name=porta]').forEach(function(r){r.addEventListener('change',function(){$('q4').classList.toggle('hide',r.value!=='c'||!r.checked)})});
 
 /* dicas */
 var HP='dica:bsc';
@@ -288,15 +378,21 @@ D.hints.forEach(function(g){
  $('hints').appendChild(row)});
 
 
+
 var rst=$('rst');rst.addEventListener('click',function(){if(rst.dataset.a!=='1'){rst.dataset.a='1';rst.textContent='Apagar o progresso? Toque de novo para confirmar';setTimeout(function(){rst.dataset.a='';rst.textContent='Recomeçar do início'},5000);return}
- try{localStorage.removeItem('bsc1')}catch(e){}store={};location.reload()});
+ try{localStorage.removeItem('bsc1')}catch(e){}store={log:[]};location.reload()});
+updLog();
 /* restaurar progresso */
 (async function(){
+ quiet=true;
  try{
-  if(store.s1){store.s1.forEach(function(n,i){wset(i,n)});if(!(await stage1(store.s1,true)))return}else return;
-  if(store.s2){$('i2').value=store.s2;if(!(await stage2(store.s2,true)))return}else return;
-  if(store.s3!=null){if(!(await stage3(store.s3,true)))return}
- }catch(e){}
+  if(!store.s1)return;store.s1.forEach(function(n,i){wset(i,n)});
+  if(!(await stage1(store.s1,true)))return;markDone(1);unlock(2);revealHints(2);
+  if(!store.s2)return;$('i2').value=store.s2;
+  if(!(await stage2(store.s2,true)))return;markDone(2);unlock(3);
+  if(store.s3==null)return;
+  if(!(await stage3(store.s3,true)))return;markDone(3);unlock(4);
+ }catch(e){}finally{quiet=false}
 })();
 })();
 </script>
