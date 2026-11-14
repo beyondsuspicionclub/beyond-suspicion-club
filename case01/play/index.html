@@ -200,6 +200,7 @@ details.dicas summary{cursor:pointer;padding:12px 0;font-size:22px}
 footer{margin:40px 0 90px;text-align:center;color:var(--mute);font-size:14px}
 footer a{color:var(--gold-hi)}
 .hide{display:none}
+.wrap{position:relative}.lang{position:absolute;right:16px;top:16px;display:flex;gap:0}.lang button{background:none;border:1px solid var(--line);color:var(--mute);font:500 11px Inter,sans-serif;letter-spacing:.18em;padding:7px 11px;cursor:pointer}.lang button.on{color:#1a1408;background:var(--gold);border-color:var(--gold)}
 
 /* caixa de telegramas */
 #logbtn{position:fixed;right:14px;bottom:14px;z-index:20;padding:12px 16px;border:1px solid var(--gold);background:rgba(11,8,5,.92);color:var(--gold-hi);font:500 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.6)}
@@ -213,7 +214,7 @@ footer a{color:var(--gold-hi)}
 </head>
 <body>
 <div class="wrap">
-<header><img src="../../selo.png" alt="Beyond Suspicion Club"><div class="eyebrow">Caso Nº 01 · O Relojoeiro · Londres, 1891</div><h1>O Telégrafo</h1>
+<header><div class="lang" role="group" aria-label="Language"><button type="button" data-l="pt">PT</button><button type="button" data-l="en">EN</button></div><img src="../../selo.png" alt="Beyond Suspicion Club"><div class="eyebrow">Caso Nº 01 · O Relojoeiro · Londres, 1891</div><h1>O Telégrafo</h1>
 <p class="intro">Aqui as respostas do dossiê chegam ao inspetor Lowe. Os telegramas voltam pelo mensageiro da delegacia.</p>
 <p class="tgleg">Nos telegramas da época, a palavra STOP fazia o papel do ponto final.</p></header>
 
@@ -244,13 +245,13 @@ footer a{color:var(--gold-hi)}
 <div id="f5">
 <label for="q1">Quem matou Ambrose Vale?</label>
 <select id="q1"><option value="">Escolha um nome…</option><option value="reed">Thomas Reed</option><option value="harriet">Harriet Vale</option><option value="pike">Cornelius Pike</option><option value="ashby">Dr. Ashby</option><option value="pratt">Agnes Pratt</option><option value="dobbs">Joseph Dobbs</option><option value="finch">Samuel Finch</option><option value="hargreaves">William Hargreaves</option></select>
-<label>A que horas ele morreu? Ajuste o relógio.</label><div id="mslot5"></div>
-<label>Como a porta da oficina ficou trancada?</label>
+<label id="qlt">A que horas ele morreu? Ajuste o relógio.</label><div id="mslot5"></div>
+<label id="qlp">Como a porta da oficina ficou trancada?</label>
 <div class="radios" id="q3">
-<label><input type="radio" name="porta" value="a"> (a) Ambrose girou a chave por dentro e morreu logo depois.</label>
-<label><input type="radio" name="porta" value="b"> (b) Alguém girou a chave por fora e a levou embora.</label>
-<label><input type="radio" name="porta" value="c"> (c) O ferrolho correu sozinho, na hora que o mecanismo marcava.</label>
-<label><input type="radio" name="porta" value="d"> (d) Alguém forçou a porta por fora e o ferrolho caiu no lugar.</label></div>
+<label><input type="radio" name="porta" value="a"> <span>(a) Ambrose girou a chave por dentro e morreu logo depois.</span></label>
+<label><input type="radio" name="porta" value="b"> <span>(b) Alguém girou a chave por fora e a levou embora.</span></label>
+<label><input type="radio" name="porta" value="c"> <span>(c) O ferrolho correu sozinho, na hora que o mecanismo marcava.</span></label>
+<label><input type="radio" name="porta" value="d"> <span>(d) Alguém forçou a porta por fora e o ferrolho caiu no lugar.</span></label></div>
 <div class="center"><button class="go" id="b5">Enviar ao inspetor</button></div></div>
 <div class="envslot" id="env5"></div><div id="o5"></div></div></section>
 
@@ -261,14 +262,73 @@ footer a{color:var(--gold-hi)}
 
 <details class="dicas"><summary>Precisa de uma dica?</summary><div id="hints"></div></details>
 
-<footer><button type="button" id="rst" class="zero">Recomeçar do início</button><br><br>Beyond Suspicion Club · Ultra Suspicionem<br><a href="../../">Voltar ao início</a></footer>
+<footer><button type="button" id="rst" class="zero">Recomeçar do início</button><br><br>Beyond Suspicion Club · Ultra Suspicionem<br><a href="../../" id="back">Voltar ao início</a></footer>
 </div>
 <button id="logbtn" class="hide" type="button">✉ Telegramas <span id="logn">0</span></button>
 <div id="ov" class="hide" role="dialog" aria-label="Telegramas recebidos"><div class="in"><button class="x" id="ovx" type="button">Fechar</button><h3>Telegramas recebidos</h3><div id="ovl"></div></div></div>
 <script src="data.js"></script>
+<script src="data_en.js"></script>
 <script>
 (function(){
-var D=window.BSC, te=new TextEncoder(), td=new TextDecoder();
+var LANG='pt';try{var qp=new URLSearchParams(location.search).get('lang');if(qp==='en'||qp==='pt'){LANG=qp;localStorage.setItem('bsc_lang',qp)}else{var sv=localStorage.getItem('bsc_lang');LANG=sv==='en'||sv==='pt'?sv:((navigator.language||'pt').toLowerCase().indexOf('pt')===0?'pt':'en')}}catch(e){}
+var EN=LANG==='en',D=EN?window.BSC_EN:window.BSC;
+var TT={
+ boxes:[['CLERKENWELL','INSP. LOWE','VIA M.','URGENTE'],['CLERKENWELL','INSP. LOWE','VIA M.','URGENT']],
+ tgname:['TELEGRAMA','TELEGRAM'],no:['Nº ','No. '],rec:['RECEBIDO','RECEIVED'],rel:['RETRANSMITIDO POR M.','RELAYED BY M.'],
+ empty:['Nenhum telegrama ainda.','No telegrams yet.'],tgn:['Telegrama ','Telegram '],rej:[' · resposta não aceita',' · answer not accepted'],
+ sending:['Enviando…','Sending…'],next:['Próximo','Next'],close:['Fechar o cofre','Close the vault'],
+ e1rep:['NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE','DO NOT REPEAT NUMBERS STOP THE VAULT HAS FIVE DIFFERENT ONES STOP LOWE'],
+ e1zero:['O COFRE NÃO ABRIU STOP NENHUM DOS CINCO NÚMEROS CONFERE STOP LOWE','THE VAULT DID NOT OPEN STOP NONE OF THE FIVE NUMBERS MATCHES STOP LOWE'],
+ e1a:['O COFRE NÃO ABRIU STOP SE EU PUDESSE CONFERIR O QUE ESTÁ ERRADO STOP POR ENQUANTO POSSO DIZER QUE ','THE VAULT DID NOT OPEN STOP IF I COULD CHECK WHAT IS WRONG STOP FOR NOW I CAN SAY THAT '],
+ e1b:[' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',' OF THE FIVE NUMBERS ARE RIGHT STOP LOWE'],e1b1:[' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',' OF THE FIVE NUMBERS IS RIGHT STOP LOWE'],
+ e2:['NADA ENCONTRADO ONDE INDICARAM STOP TENTEM OUTRA PALAVRA STOP LOWE','NOTHING FOUND WHERE YOU INDICATED STOP TRY ANOTHER WORD STOP LOWE'],
+ e3:['ESSA NÃO PARECE A HORA PROGRAMADA STOP LOWE','THAT DOES NOT LOOK LIKE THE PROGRAMMED HOUR STOP LOWE'],
+ e4:['ESSA NÃO É A HORA QUE VALE ESCOLHEU STOP LOWE','THAT IS NOT THE HOUR VALE CHOSE STOP LOWE'],
+ e5a:['A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM TODAS AS PERGUNTAS STOP LOWE','THE ACCUSATION IS INCOMPLETE STOP ANSWER ALL THE QUESTIONS STOP LOWE'],
+ e5n:['O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE','THE INSPECTOR IS NOT CONVINCED STOP LOWE'],
+ e5w:['O RELÓGIO NO COLETE DELE NÃO CONCORDA STOP LOWE','THE WATCH IN HIS WAISTCOAT DOES NOT AGREE STOP LOWE'],
+ e5d:['A PORTA FOI TRANCADA ÀS DEZ E QUINZE STOP A ESSA HORA O ASSASSINO JÁ ESTAVA EM OUTRO LUGAR STOP LOWE','THE DOOR WAS BOLTED AT A QUARTER PAST TEN STOP BY THEN THE KILLER WAS ELSEWHERE STOP LOWE'],
+ ok5:['SUA ACUSAÇÃO FOI ACEITA STOP O CASO ESTÁ ENCERRADO STOP PODEM ABRIR O ENVELOPE C STOP LOWE','YOUR ACCUSATION IS ACCEPTED STOP THE CASE IS CLOSED STOP YOU MAY OPEN ENVELOPE C STOP LOWE'],
+ sig:['— Inspetor Lowe','— Inspector Lowe'],lt:['Carta do inspetor Lowe','Letter from Inspector Lowe'],
+ eb:['ENVIE ALGUMA RESPOSTA STOP LOWE','SEND ANY ANSWER STOP LOWE'],
+ club1:['Até o próximo caso','Until the next case'],
+ club2:['Um nome ficou sem rosto, e uma data ficou sem explicação: abril de 1912, um navio chamado Halcyon, uma passagem que ninguém lembra de ter comprado.','A name was left without a face, and a date without an explanation: April 1912, a ship called the Halcyon, a ticket no one remembers buying.'],
+ club3:['O Caso 2 está a caminho. Aguarde.','Case 2 is on its way. Stand by.'],club4:['Entrar na lista de espera','Join the waiting list'],
+ more:['Mais uma dica (','One more hint ('],ask:['Pedir uma dica','Ask for a hint'],
+ rs1:['Apagar o progresso? Toque de novo para confirmar','Erase progress? Tap again to confirm'],rs0:['Recomeçar do início','Start over'],
+ envalt:['Envelope %. Não abra até o momento indicado.','Envelope %. Do not open until the moment indicated.'],
+ clkalt:['Relógio de bolso. Arraste os ponteiros.','Pocket watch. Drag the hands.'],zero:['Zerar o relógio','Reset the watch'],
+ num:['Número ','Number '],up:['aumentar','increase'],dn:['diminuir','decrease'],nb:['DR. ASHBY<br>ANOTAÇÕES','DR. ASHBY<br>NOTES'],
+ chestalt:['Caixa de couro trancada com um cadeado','Leather chest locked with a padlock'],handle:['Girar a maçaneta do cofre','Turn the vault handle']
+};
+function tt(k){return TT[k][EN?1:0]}
+var WORDKEY=EN?'PENDULUM':'PENDULO';
+document.documentElement.lang=EN?'en':'pt-BR';
+document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===LANG);b.addEventListener('click',function(){if(b.dataset.l===LANG)return;try{localStorage.setItem('bsc_lang',b.dataset.l)}catch(e){}var u=location.pathname;location.href=u+'?lang='+b.dataset.l})});
+(function(){if(!EN)return;
+ function q(sel,txt){var e=document.querySelector(sel);if(e)e.textContent=txt}
+ function qa(sel,txt){var e=document.querySelector(sel);if(e)e.setAttribute('aria-label',txt)}
+ document.title='The Telegraph · Case Nº 01 · Beyond Suspicion Club';
+ q('.eyebrow','Case Nº 01 · The Watchmaker · London, 1891');q('h1','The Telegraph');
+ q('.intro','Here the answers from the dossier reach Inspector Lowe. The telegrams come back by the station messenger.');
+ q('.tgleg','In the telegrams of the day, the word STOP did the work of a full stop.');
+ [['#s1','The vault'],['#s2','The padlock'],['#s3','The clock'],['#s4','The bolt'],['#s5','The accusation'],['#sb','Bonus question']].forEach(function(x){q(x[0]+' h2 span:nth-child(2)',x[1])});
+ document.querySelectorAll('.ck').forEach(function(e){e.textContent='✓ review'});
+ q('#s4 p.d','The bolt closed by itself. Now set the same clock: at what hour did Vale set the lock?');
+ q('#s5 p.d','Answer the questions. The inspector only accepts the complete accusation.');
+ q('label[for=q1]','Who killed Ambrose Vale?');q('#qlt','At what time did he die? Set the clock.');q('#qlp','How did the workshop door end up locked?');
+ var op=document.querySelectorAll('#q1 option');op[0].textContent='Choose a name…';
+ var rd=['(a) Ambrose turned the key from inside and died soon after.','(b) Someone turned the key from outside and took it away.','(c) The bolt shot home by itself, at the hour the mechanism was set for.','(d) Someone forced the door from outside and the bolt dropped into place.'];
+ document.querySelectorAll('#q3 label span').forEach(function(e,i){e.textContent=rd[i]});
+ q('#b2','Open');q('#b3','Telegraph');q('#bp','Telegraph');q('#b5','Send to the inspector');q('#bb','Send to the inspector');
+ q('#sb p.d','Who is the faceless client?');q('details.dicas summary','Need a hint?');
+ q('#rst','Start over');q('#back','Back to home');
+ qa('#i2','Word');qa('#ib','bonus answer');
+ document.getElementById('logbtn').firstChild.textContent='✉ Telegrams ';
+ q('#ov h3','Telegrams received');q('#ovx','Close');document.getElementById('ov').setAttribute('aria-label','Telegrams received');
+ document.getElementById('closeBtn').textContent=tt('close');
+})();
+var te=new TextEncoder(), td=new TextDecoder();
 function $(i){return document.getElementById(i)}
 function b64(s){var b=atob(s),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
 async function sha(s){var h=await crypto.subtle.digest('SHA-256',te.encode('bsc1|'+s));return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')}
@@ -282,25 +342,25 @@ store.log=store.log||[];
 function save(){try{localStorage.setItem('bsc1',JSON.stringify(store))}catch(e){}}
 
 /* telegrama */
-var BOX=[['3%','17.7%','CLERKENWELL'],['21.1%','19.4%','INSP. LOWE'],['40.7%','18.5%','VIA M.'],['59.5%','19.5%','URGENTE'],['79.4%','18%','']];
+var BOX=[['3%','17.7%',tt('boxes')[0]],['21.1%','19.4%',tt('boxes')[1]],['40.7%','18.5%',tt('boxes')[2]],['59.5%','19.5%',tt('boxes')[3]],['79.4%','18%','']];
 function tg(txt,err){var d=document.createElement('div');d.className='tg'+(err?' err':'');
  var th=document.createElement('div');th.className='th';
  th.innerHTML='<svg class="ar" viewBox="0 0 1448 346" aria-hidden="true"><defs><path id="bp'+Math.random().toString(36).slice(2,7)+'" d="M 405,203 Q 724,246 1043,203"/></defs></svg>';
  var svg=th.firstChild,pid=svg.querySelector('path').id,tx0=document.createElementNS('http://www.w3.org/2000/svg','text');
  tx0.setAttribute('font-family','Old Standard TT,serif');tx0.setAttribute('font-weight','700');tx0.setAttribute('font-size','40');tx0.setAttribute('letter-spacing','18');tx0.setAttribute('fill','#8a3a22');tx0.setAttribute('text-anchor','middle');
- var tp=document.createElementNS('http://www.w3.org/2000/svg','textPath');tp.setAttributeNS('http://www.w3.org/1999/xlink','href','#'+pid);tp.setAttribute('href','#'+pid);tp.setAttribute('startOffset','50%');tp.textContent='TELEGRAMA';tx0.appendChild(tp);svg.appendChild(tx0);
- BOX.forEach(function(b,i){var x=document.createElement('div');x.className='bx';x.style.left=b[0];x.style.width=b[1];x.textContent=i===4?'Nº '+(100+(txt.length*37+i*11)%800):b[2];th.appendChild(x)});
+ var tp=document.createElementNS('http://www.w3.org/2000/svg','textPath');tp.setAttributeNS('http://www.w3.org/1999/xlink','href','#'+pid);tp.setAttribute('href','#'+pid);tp.setAttribute('startOffset','50%');tp.textContent=tt('tgname');tx0.appendChild(tp);svg.appendChild(tx0);
+ BOX.forEach(function(b,i){var x=document.createElement('div');x.className='bx';x.style.left=b[0];x.style.width=b[1];x.textContent=i===4?tt('no')+(100+(txt.length*37+i*11)%800):b[2];th.appendChild(x)});
  var tb=document.createElement('div');tb.className='tb';var tx=document.createElement('div');tx.className='tx';tx.textContent=txt;tb.appendChild(tx);
- if(!err){var rc=document.createElement('div');rc.className='rc';rc.textContent='RECEBIDO';tb.appendChild(rc)}
- var tf=document.createElement('div');tf.className='tf';tf.innerHTML='<span class="l">RETRANSMITIDO POR M.</span><span class="r">CLERKENWELL</span>';
+ if(!err){var rc=document.createElement('div');rc.className='rc';rc.textContent=tt('rec');tb.appendChild(rc)}
+ var tf=document.createElement('div');tf.className='tf';tf.innerHTML='<span class="l">'+tt('rel')+'</span><span class="r">CLERKENWELL</span>';
  d.appendChild(th);d.appendChild(tb);d.appendChild(tf);return d}
 var quiet=false;
 function addLog(k,t,e){if(quiet)return;store.log.push({k:k,t:t,e:!!e});if(store.log.length>80)store.log.shift();save();updLog()}
 function snt(txt,err){addLog('tg',txt,err);return tg(txt,err)}
 function updLog(){$('logn').textContent=store.log.length;$('logbtn').classList.toggle('hide',!store.log.length)}
-function renderLog(){var l=$('ovl');l.innerHTML='';if(!store.log.length){l.innerHTML='<p class="empty">Nenhum telegrama ainda.</p>';return}
+function renderLog(){var l=$('ovl');l.innerHTML='';if(!store.log.length){l.innerHTML='<p class="empty">'+tt('empty')+'</p>';return}
  var n=0;store.log.forEach(function(x){var lb=document.createElement('div');lb.className='lb';
-  if(x.k==='tg'){n++;lb.textContent='Telegrama '+n+(x.e?' · resposta não aceita':'');l.appendChild(lb);l.appendChild(tg(x.t,x.e))}
+  if(x.k==='tg'){n++;lb.textContent=tt('tgn')+n+(x.e?tt('rej'):'');l.appendChild(lb);l.appendChild(tg(x.t,x.e))}
   else{lb.textContent=x.t.nota;l.appendChild(lb);var nt=document.createElement('div');nt.className='note';nt.textContent=x.t.bilhete;l.appendChild(nt)}})}
 $('logbtn').addEventListener('click',function(){renderLog();$('ov').classList.remove('hide');document.body.style.overflow='hidden'});
 function closeOv(){$('ov').classList.add('hide');document.body.style.overflow=''}
@@ -317,16 +377,16 @@ document.querySelectorAll('.step h2').forEach(function(h){h.addEventListener('cl
 function nextBtn(n,hideSel){/* some controles, mostra Próximo */
  revealHints(n+1);
  hideSel.forEach(function(id){var e=$(id);if(e)e.classList.add('hide')});
- var box=$('n'+n);box.innerHTML='';var b=document.createElement('button');b.type='button';b.className='go nx';b.textContent='Próximo';
+ var box=$('n'+n);box.innerHTML='';var b=document.createElement('button');b.type='button';b.className='go nx';b.textContent=tt('next');
  b.addEventListener('click',function(){box.innerHTML='';markDone(n);unlock(n+1);var t=$('s'+(n+1));setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'})},120)});box.appendChild(b)}
-function busy(b,on){b.disabled=on;if(b.dataset.l===undefined)b.dataset.l=b.textContent;b.textContent=on?'Enviando…':b.dataset.l}
-var ZERO=['NENHUM','UM','DOIS','TRÊS','QUATRO'];
-function env(letter){var e=document.createElement('div');e.className='env';var i=document.createElement('img');i.src='rotulo_'+letter+'.png';i.alt='Envelope '+letter+'. Não abra até o momento indicado.';e.appendChild(i);return e}
+function busy(b,on){b.disabled=on;if(b.dataset.l===undefined)b.dataset.l=b.textContent;b.textContent=on?tt('sending'):b.dataset.l}
+var ZERO=EN?['NONE','ONE','TWO','THREE','FOUR']:['NENHUM','UM','DOIS','TRÊS','QUATRO'];
+function env(letter){var e=document.createElement('div');e.className='env';var i=document.createElement('img');i.src='rotulo_'+letter+(EN?'_EN':'')+'.png';i.alt=tt('envalt').replace('%',letter);e.appendChild(i);return e}
 
 /* relógio de bolso */
 function Clock(host){
  var self={h:12,m:0},NS='http://www.w3.org/2000/svg',cx=150,cy=312,uid=Math.random().toString(36).slice(2,6);
- var svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','-80 -80 460 602');svg.setAttribute('role','img');svg.setAttribute('aria-label','Relógio de bolso. Arraste os ponteiros.');
+ var svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','-80 -80 460 602');svg.setAttribute('role','img');svg.setAttribute('aria-label',tt('clkalt'));
  var R=['XII','I','II','III','IV','V','VI','VII','VIII','IX','X','XI'];
  var s='<defs><linearGradient id="gb'+uid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbeab0"/><stop offset=".35" stop-color="#c79f4a"/><stop offset=".65" stop-color="#8d6a28"/><stop offset="1" stop-color="#e3c374"/></linearGradient>'
  +'<radialGradient id="gd'+uid+'" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#fbf4de"/><stop offset=".7" stop-color="#eadbb2"/><stop offset="1" stop-color="#d3bd8a"/></radialGradient>'
@@ -377,7 +437,7 @@ function Clock(host){
  self.reset=function(){self.h=12;self.m=0;draw()};
  self.close=function(){var t0=self.mins(),st=null,D0=1100;if(t0===0){self.reset();return}
   function f(ts){if(st===null)st=ts;var k=Math.min(1,(ts-st)/D0),e=1-Math.pow(1-k,3),t=Math.round(t0+(720-t0)*e)%720;self.h=Math.floor(t/60);self.m=t%60;draw();if(k<1)requestAnimationFrame(f);else self.reset()}requestAnimationFrame(f)};
- var rb=document.createElement('button');rb.type='button';rb.className='zero';rb.textContent='Zerar o relógio';rb.addEventListener('click',self.reset);host.appendChild(rb);
+ var rb=document.createElement('button');rb.type='button';rb.className='zero';rb.textContent=tt('zero');rb.addEventListener('click',self.reset);host.appendChild(rb);
  return self}
 var c3=Clock($('c3'));
 function cand(m){return [m,(m+1)%720,(m+719)%720]}
@@ -386,17 +446,17 @@ function cand(m){return [m,(m+1)%720,(m+719)%720]}
 var wv=[1,1,1,1,1],MAXN=18,wh=$('wheels'),wins=[];
 function wset(i,v){wv[i]=((v-1+MAXN)%MAXN)+1;wins[i].textContent=wv[i];wins[i].parentNode.setAttribute('aria-valuenow',wv[i])}
 for(var wi=0;wi<5;wi++)(function(i){
- var c=document.createElement('div');c.className='wh';c.style.left=((131+i*111.9)/776*100)+'%';c.tabIndex=0;c.setAttribute('role','spinbutton');c.setAttribute('aria-label','Número '+(i+1));c.setAttribute('aria-valuemin','1');c.setAttribute('aria-valuemax',MAXN);
- var u=document.createElement('button');u.type='button';u.textContent='▲';u.setAttribute('aria-label','aumentar');var w=document.createElement('div');w.className='win';var dn=document.createElement('button');dn.type='button';dn.textContent='▼';dn.setAttribute('aria-label','diminuir');
+ var c=document.createElement('div');c.className='wh';c.style.left=((131+i*111.9)/776*100)+'%';c.tabIndex=0;c.setAttribute('role','spinbutton');c.setAttribute('aria-label',tt('num')+(i+1));c.setAttribute('aria-valuemin','1');c.setAttribute('aria-valuemax',MAXN);
+ var u=document.createElement('button');u.type='button';u.textContent='▲';u.setAttribute('aria-label',tt('up'));var w=document.createElement('div');w.className='win';var dn=document.createElement('button');dn.type='button';dn.textContent='▼';dn.setAttribute('aria-label',tt('dn'));
  c.appendChild(u);c.appendChild(w);c.appendChild(dn);wh.appendChild(c);wins.push(w);
  u.addEventListener('click',function(){wset(i,wv[i]+1)});dn.addEventListener('click',function(){wset(i,wv[i]-1)});
  c.addEventListener('keydown',function(e){if(e.key==='ArrowUp'){wset(i,wv[i]+1);e.preventDefault()}else if(e.key==='ArrowDown'){wset(i,wv[i]-1);e.preventDefault()}});
  w.addEventListener('wheel',function(e){wset(i,wv[i]+(e.deltaY<0?1:-1));e.preventDefault()},{passive:false});
  wset(i,1)})(wi);
-var pl=document.createElement('div');pl.className='pile';pl.innerHTML='<div class="pp p1"></div><div class="pp p2"></div><div class="pp p3"></div><div class="nb"><span>DR. ASHBY<br>ANOTAÇÕES</span></div>';$('inside').appendChild(pl);$('inside').appendChild(env('A'));
+var pl=document.createElement('div');pl.className='pile';pl.innerHTML='<div class="pp p1"></div><div class="pp p2"></div><div class="pp p3"></div><div class="nb"><span>'+tt('nb')+'</span></div>';$('inside').appendChild(pl);$('inside').appendChild(env('A'));
 
 function makeChest(letter){var d=document.createElement('div');d.className='chest2';
- d.innerHTML='<img class="co" src="caixa_aberta.png" alt=""><div class="cenv"></div><img class="cc" src="caixa_fechada.png" alt="Caixa de couro trancada com um cadeado"><img class="cf" src="caixa_aberta_frente.png" alt=""><div class="clk"><img class="arc" src="cadeado_arco.png" alt=""><img class="bdy" src="cadeado_corpo.png" alt=""></div>';
+ d.innerHTML='<img class="co" src="caixa_aberta.png" alt=""><div class="cenv"></div><img class="cc" src="caixa_fechada.png" alt="'+tt('chestalt')+'"><img class="cf" src="caixa_aberta_frente.png" alt=""><div class="clk"><img class="arc" src="cadeado_arco.png" alt=""><img class="bdy" src="cadeado_corpo.png" alt=""></div>';
  d.querySelector('.cenv').appendChild(env(letter));return d}
 function chestOpen(d,instant){if(instant){d.classList.add('nt','unlock','open');setTimeout(function(){d.classList.remove('nt')},80)}else{d.classList.add('unlock');setTimeout(function(){d.classList.add('open')},1000)}}
 var chestB=makeChest('B');$('chestB').appendChild(chestB);
@@ -410,22 +470,22 @@ function trShut(inst){if(inst){trEl.querySelectorAll('img,.bolt').forEach(functi
 function openSafe(instant){var h=$('handle'),d=$('door'),sf=$('safe');h.classList.add('turn');$('closeBtn').classList.remove('hide');if(instant){d.style.transition='none';sf.style.transition='none';d.classList.add('open');sf.classList.add('opened');setTimeout(function(){d.style.transition='';sf.style.transition=''},50)}else setTimeout(function(){d.classList.add('open');sf.classList.add('opened')},2000)}
 function shake(){var h=$('handle');h.classList.remove('shake');void h.offsetWidth;h.classList.add('shake')}
 async function stage1(nums,silent){
- if(new Set(nums).size<5){if(!silent){shake();show('o1',snt('NÃO REPITA NÚMEROS STOP O COFRE TEM CINCO DIFERENTES STOP LOWE',true))}return false}
+ if(new Set(nums).size<5){if(!silent){shake();show('o1',snt(tt('e1rep'),true))}return false}
  var key='cofre:'+nums.slice().sort(function(a,b){return a-b}).join('-');
  var t=await dec(key,D.cofre);
  if(t){store.s1=nums;save();openSafe(silent);
   if(silent){show('o1',tg(t))}else{setTimeout(function(){show('o1',snt(t));nextBtn(1,[])},1500)}return true}
  var hs=await Promise.all(nums.map(function(n){return sha('n:'+n)})),c=hs.filter(function(h){return D.cofre_h.indexOf(h)>=0}).length;
- if(!silent){shake();show('o1',snt(c===0?'O COFRE NÃO ABRIU STOP NENHUM DOS CINCO NÚMEROS CONFERE STOP LOWE':'O COFRE NÃO ABRIU STOP SE EU PUDESSE CONFERIR O QUE ESTÁ ERRADO STOP POR ENQUANTO POSSO DIZER QUE '+ZERO[c]+' DOS CINCO NÚMEROS ESTÃO CERTOS STOP LOWE',true))}
+ if(!silent){shake();show('o1',snt(c===0?tt('e1zero'):tt('e1a')+ZERO[c]+(c===1?tt('e1b1'):tt('e1b')),true))}
  return false}
 function closeSafe(){var h=$('handle'),d=$('door');d.classList.remove('open');$('safe').classList.remove('opened');$('closeBtn').classList.add('hide');setTimeout(function(){h.classList.remove('turn')},1500)}
 function norm(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z]/g,'')}
 async function stage2(w,silent){
- var t=await dec('palavra:'+norm(w),D.palavra);
- if(t){store.s2=w;save();
-  if(silent){chestOpen(chestB,true);show('o2',tg(t))}
-  else{chestOpen(chestB);setTimeout(function(){show('o2',snt(t));nextBtn(2,['b2'])},3800)}return true}
- if(!silent){chestB.classList.remove('shake');void chestB.offsetWidth;chestB.classList.add('shake');show('o2',snt('NADA ENCONTRADO ONDE INDICARAM STOP TENTEM OUTRA PALAVRA STOP LOWE',true))}return false}
+ var tx=await dec('palavra:'+norm(w),D.palavra);
+ if(tx){store.s2=w;save();
+  if(silent){chestOpen(chestB,true);show('o2',tg(tx))}
+  else{chestOpen(chestB);setTimeout(function(){show('o2',snt(tx));nextBtn(2,['b2'])},3800)}return true}
+ if(!silent){chestB.classList.remove('shake');void chestB.offsetWidth;chestB.classList.add('shake');show('o2',snt(tt('e2'),true))}return false}
 async function stage3(m,silent){
  var cs=cand(m);
  for(var i=0;i<cs.length;i++){var t=await dec('mec:'+cs[i],D.mec);
@@ -433,40 +493,41 @@ async function stage3(m,silent){
    var lbl=document.createElement('div');lbl.className='nlb';lbl.textContent=o.nota;box.appendChild(lbl);var n=document.createElement('div');n.className='note';n.textContent=o.bilhete;box.appendChild(n);
    addLog('note',{nota:o.nota,bilhete:o.bilhete});box.appendChild(silent?tg(o.tel):snt(o.tel));
    if(!silent)nextBtn(3,['b3']);return true}}
- if(!silent)show('o3',snt('ESSA NÃO PARECE A HORA PROGRAMADA STOP LOWE',true));return false}
+ if(!silent)show('o3',snt(tt('e3'),true));return false}
 async function tryTime(prefix,blob,m){var cs=cand(m);for(var i=0;i<cs.length;i++){var t=await dec(prefix+cs[i],blob);if(t)return cs[i]}return null}
 async function stage4(m,silent){
  var cs=cand(m);
  for(var i=0;i<cs.length;i++){var t=await dec('prog:'+cs[i],D.prog_ok);
   if(t){store.sp=m;store.spk=cs[i];save();trOpen(silent);var box=$('o4p');box.innerHTML='';box.appendChild(silent?tg(t):snt(t));if(!silent)nextBtn(4,['bp']);return true}}
- if(!silent)show('o4p',snt('ESSA NÃO É A HORA QUE VALE ESCOLHEU STOP LOWE',true));return false}
+ if(!silent)show('o4p',snt(tt('e4'),true));return false}
 async function stage5(){
  var who=$('q1').value,r=document.querySelector('input[name=porta]:checked'),door=r&&r.value;
- if(!who||!door){show('o5',snt('A ACUSAÇÃO ESTÁ INCOMPLETA STOP RESPONDAM TODAS AS PERGUNTAS STOP LOWE',true));return false}
+ if(!who||!door){show('o5',snt(tt('e5a'),true));return false}
  var wok=await dec('quem:'+who,D.quem_ok);
- if(!wok){var s=await dec('quem-msg:'+who,D.sus[who]);show('o5',snt(s||'O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
+ if(!wok){var s=await dec('quem-msg:'+who,D.sus[who]);show('o5',snt(s||tt('e5n'),true));return false}
  var mt=await tryTime('morte:',D.morte_ok,c3.mins());
- if(mt===null){show('o5',snt('O RELÓGIO NO COLETE DELE NÃO CONCORDA STOP LOWE',true));return false}
- if(door!=='c'){show('o5',snt('A PORTA FOI TRANCADA ÀS DEZ E QUINZE STOP A ESSA HORA O ASSASSINO JÁ ESTAVA EM OUTRO LUGAR STOP LOWE',true));return false}
+ if(mt===null){show('o5',snt(tt('e5w'),true));return false}
+ if(door!=='c'){show('o5',snt(tt('e5d'),true));return false}
  var f=await dec('final:pike|'+mt+'|c|'+store.spk,D.final);
- if(!f){show('o5',snt('O INSPETOR NÃO ESTÁ CONVENCIDO STOP LOWE',true));return false}
+ if(!f){show('o5',snt(tt('e5n'),true));return false}
  store.s5=1;save();
  $('f5').classList.add('hide');var cc=makeChest('C');$('env5').appendChild(cc);chestOpen(cc);
- var box=$('o5');box.innerHTML='';var e=document.createElement('div');e.className='note letter';e.innerHTML='<div class="lt"></div><div class="sg">— Inspetor Lowe</div>';e.firstChild.textContent=f;
- setTimeout(function(){box.appendChild(snt('SUA ACUSAÇÃO FOI ACEITA STOP O CASO ESTÁ ENCERRADO STOP PODEM ABRIR O ENVELOPE C STOP LOWE'));var lb=document.createElement('div');lb.className='nlb';lb.textContent='Carta do inspetor Lowe';box.appendChild(lb);box.appendChild(e)},3800);
+ var box=$('o5');box.innerHTML='';var e=document.createElement('div');e.className='note letter';e.innerHTML='<div class="lt"></div><div class="sg"></div>';e.querySelector('.sg').textContent=tt('sig');e.firstChild.textContent=f;
+ setTimeout(function(){box.appendChild(snt(tt('ok5')));var lb=document.createElement('div');lb.className='nlb';lb.textContent=tt('lt');box.appendChild(lb);box.appendChild(e)},3800);
  return true}
 
 function bind(id,fn){var b=$(id);b.addEventListener('click',async function(){busy(b,true);try{await fn()}finally{busy(b,false)}})}
+$('handle').setAttribute('aria-label',tt('handle'));$('closeBtn').textContent=tt('close');
 $('handle').addEventListener('click',function(){var h=$('handle');if(h.classList.contains('turn'))return;stage1(wv.slice())});
 $('closeBtn').addEventListener('click',closeSafe);
 bind('b2',function(){return stage2($('i2').value)});
 bind('b3',function(){return stage3(c3.mins())});
 bind('bp',function(){return stage4(c3.mins())});
 bind('b5',function(){return stage5()});
-bind('bb',async function(){if(!$('ib').value.trim()){show('ob',snt('ENVIE ALGUMA RESPOSTA STOP LOWE',true));return}var o=$('ob');o.innerHTML='';var c=document.createElement('div');c.className='club';c.innerHTML='<img src="../../selo.png" alt="" width="56" height="56"><div class="ce">Beyond Suspicion Club</div><h3>Até o próximo caso</h3><p></p><p class="cs"></p>';
- c.querySelectorAll('p')[0].textContent='Um nome ficou sem rosto, e uma data ficou sem explicação: abril de 1912, um navio chamado Halcyon, uma passagem que ninguém lembra de ter comprado.';
- c.querySelectorAll('p')[1].textContent='O Caso 2 está a caminho. Aguarde.';
- var a=document.createElement('a');a.href='../../';a.className='cl';a.textContent='Entrar na lista de espera';c.appendChild(a);o.appendChild(c)});
+bind('bb',async function(){if(!$('ib').value.trim()){show('ob',snt(tt('eb'),true));return}var o=$('ob');o.innerHTML='';var c=document.createElement('div');c.className='club';c.innerHTML='<img src="../../selo.png" alt="" width="56" height="56"><div class="ce">Beyond Suspicion Club</div><h3></h3><p></p><p class="cs"></p>';
+ c.querySelector('h3').textContent=tt('club1');c.querySelectorAll('p')[0].textContent=tt('club2');
+ c.querySelectorAll('p')[1].textContent=tt('club3');
+ var a=document.createElement('a');a.href='../../';a.className='cl';a.textContent=tt('club4');c.appendChild(a);o.appendChild(c)});
 $('i2').addEventListener('keydown',function(e){if(e.key==='Enter')$('b2').click()});
 
 /* dicas */
@@ -475,14 +536,14 @@ D.hints.forEach(function(g){
  var row=document.createElement('div');row.className='hintrow'+(g[2]>0?' hide':'');row.dataset.need=g[2];var n=g[1].length,shown=0;
  row.innerHTML='<b></b><div class="hxs"></div><button type="button"></button>';
  row.firstChild.textContent=g[0];var bt=row.lastChild,hx=row.querySelector('.hxs');
- function lab(){bt.textContent=shown?'Mais uma dica ('+shown+'/'+n+')':'Pedir uma dica'}
+ function lab(){bt.textContent=shown?tt('more')+shown+'/'+n+')':tt('ask')}
  lab();
- bt.addEventListener('click',async function(){if(shown>=n)return;var t=await dec(HP,g[1][shown]);var p=document.createElement('p');p.className='hx';p.textContent=(shown+1)+'. '+t;hx.appendChild(p);shown++;if(shown>=n)bt.classList.add('hide');else lab()});
+ bt.addEventListener('click',async function(){if(shown>=n)return;var tx=await dec(HP,g[1][shown]);var p=document.createElement('p');p.className='hx';p.textContent=(shown+1)+'. '+tx;hx.appendChild(p);shown++;if(shown>=n)bt.classList.add('hide');else lab()});
  $('hints').appendChild(row)});
 
 
 
-var rst=$('rst');rst.addEventListener('click',function(){if(rst.dataset.a!=='1'){rst.dataset.a='1';rst.textContent='Apagar o progresso? Toque de novo para confirmar';setTimeout(function(){rst.dataset.a='';rst.textContent='Recomeçar do início'},5000);return}
+var rst=$('rst');rst.addEventListener('click',function(){if(rst.dataset.a!=='1'){rst.dataset.a='1';rst.textContent=tt('rs1');setTimeout(function(){rst.dataset.a='';rst.textContent=tt('rs0')},5000);return}
  try{localStorage.removeItem('bsc1')}catch(e){}store={log:[]};location.reload()});
 updLog();
 /* restaurar progresso */
@@ -491,8 +552,8 @@ updLog();
  try{
   if(!store.s1)return;store.s1.forEach(function(n,i){wset(i,n)});
   if(!(await stage1(store.s1,true)))return;markDone(1);unlock(2);revealHints(2);
-  if(!store.s2)return;$('i2').value=store.s2;
-  if(!(await stage2(store.s2,true)))return;markDone(2);unlock(3);
+  if(!store.s2)return;$('i2').value=WORDKEY;
+  if(!(await stage2(WORDKEY,true)))return;markDone(2);unlock(3);
   if(store.s3==null)return;
   if(!(await stage3(store.s3,true)))return;markDone(3);unlock(4);
   if(store.sp==null)return;
