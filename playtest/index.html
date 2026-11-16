@@ -278,8 +278,10 @@ function renderPlay(box){
 function renderThanks(box){
   box.innerHTML = `<h2>Obrigada por investigar com a gente</h2>${noticeHTML(3)}
   <p class="lead">Suas respostas ajudam a decidir o preço e o que mudar antes do lançamento. Se quiser contar mais alguma coisa, é só falar com a Thalita.</p>
-  <p class="note">Seguimos em <strong>@beyondsuspicionclub</strong> no Instagram.</p>`;
+  <p class="note">Seguimos em <strong>@beyondsuspicionclub</strong> no Instagram.</p>
+  <div class="actions"><button class="btn ghost" id="again" type="button">Preencher de novo (outra pessoa)</button></div>`;
   wireCopy(box);
+  $("#again", box).onclick = () => { S = {id:uid(), name:"", a:{1:{},2:{},3:{}}, done:{}, sent:{}, notice:null, view:null}; save(); show("intro"); };
 }
 
 function renderStage(box, n){
