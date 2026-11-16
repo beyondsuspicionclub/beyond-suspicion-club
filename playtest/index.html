@@ -271,8 +271,8 @@ function renderIntro(box){
 function renderPlay(box){
   box.innerHTML = `<h2>Hora de jogar</h2>${noticeHTML(1)}
   <p class="lead">Etapa 1 pronta${S.name ? ", " + esc(S.name) : ""}. Abram a caixa e investiguem o caso. Quando terminarem (ou quando desistirem), volte aqui e toque em continuar.</p>
-  <div class="actions"><button class="btn" id="go" type="button">Já joguei, continuar</button></div>`;
-  wireCopy(box); $("#go", box).onclick = () => show("s2");
+  <div class="actions"><button class="btn ghost" id="back" type="button">← Voltar às respostas</button><button class="btn" id="go" type="button">Já joguei, continuar</button></div>`;
+  wireCopy(box); $("#go", box).onclick = () => show("s2"); $("#back", box).onclick = () => show("s1");
 }
 function renderThanks(box){
   box.innerHTML = `<h2>Obrigada por investigar com a gente</h2>${noticeHTML(3)}
@@ -288,8 +288,10 @@ function renderStage(box, n){
   const form = el("form", {novalidate:""}); box.append(form);
   const items = st.items.filter(i => !(i.ifNoName && S.name));
   items.forEach(it => form.append(renderItem(it, A, n)));
-  const act = el("div", {class:"actions"}, `<button class="btn" type="submit">${n===3 ? "Enviar respostas" : "Enviar e continuar"}</button><span class="note" id="msg" role="status"></span>`);
+  form.append(el("div", {id:"failbox"}));
+  const act = el("div", {class:"actions"}, `<button class="btn ghost" type="button" id="back">← Voltar</button><button class="btn" type="submit" id="sendbtn">${n===3 ? "Enviar respostas" : "Enviar e continuar"}</button><span class="note" id="msg" role="status"></span>`);
   form.append(act);
+  $("#back", form).onclick = () => show(n===1 ? "intro" : n===2 ? "play" : "s2");
   form.onsubmit = ev => { ev.preventDefault(); submit(n, items, form); };
 }
 
@@ -392,21 +394,32 @@ function submit(n, items, form){
   if(first){ msg.textContent = "Faltam respostas ou há valores fora de ordem."; first.scrollIntoView({behavior:"smooth", block:"center"}); return; }
   msg.textContent = "";
   if(n===1) S.name = (A.nome||"").trim(); else if(!S.name && A.nome) S.name = A.nome.trim();
-  S.done[n] = true; save();
-  const btn = $("button[type=submit]", form); btn.disabled = true; btn.textContent = "Enviando…";
-  send(n).then(ok => {
-    S.notice = {n, ok, text: summary(n)}; if(ok) S.sent[n] = true; save();
-    show(n===1 ? "play" : n===2 ? "s3" : "thanks");
+  save();
+  const next = n===1 ? "play" : n===2 ? "s3" : "thanks";
+  const btn = $("#sendbtn", form), label = btn.textContent; btn.disabled = true; btn.textContent = "Enviando…";
+  $("#failbox", form).innerHTML = "";
+  send(n).then(res => {
+    if(res.ok){ S.done[n] = true; S.sent[n] = true; S.notice = {n, ok:true, text:""}; save(); show(next); return; }
+    btn.disabled = false; btn.textContent = "Tentar de novo";
+    const fb = $("#failbox", form);
+    fb.innerHTML = `<div class="status warn" role="alert">Não consegui enviar agora (${esc(res.why)}). Suas respostas continuam aqui: toque em <strong>Tentar de novo</strong>. Se não funcionar, copie o texto abaixo e mande para a Thalita.</div>
+    <textarea class="copybox" readonly id="copytxt">${esc(summary(n))}</textarea>
+    <div class="actions" style="margin-top:0"><button class="btn ghost" type="button" id="copybtn">Copiar respostas</button><button class="btn ghost" type="button" id="skip">Continuar sem enviar</button></div>`;
+    wireCopy(fb);
+    $("#skip", fb).onclick = () => { S.done[n] = true; S.notice = {n, ok:false, text:summary(n)}; save(); show(next); };
+    fb.scrollIntoView({behavior:"smooth", block:"center"});
   });
 }
 async function send(n){
-  if(!CONFIG.endpoint) return false;
+  if(!CONFIG.endpoint) return {ok:false, why:"sem endereço de envio configurado"};
   const A = S.a[n]; const body = {_subject:`BSC playtest · etapa ${n} · ${S.name || "sem nome"}`, etapa:n, id:S.id, nome:S.name, enviado_em:new Date().toISOString(), resumo:summary(n), ...CONFIG.extra};
   flatItems(n).forEach(it => { if(it.id!=="nome") body[it.id] = Array.isArray(A[it.id]) ? A[it.id].join("; ") : (A[it.id] ?? ""); });
   try{
     const r = await fetch(CONFIG.endpoint, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(body)});
-    return r.ok;
-  }catch(e){ return false; }
+    if(r.ok) return {ok:true};
+    let d = ""; try{ const j = await r.json(); d = j.error || (j.errors && j.errors[0] && j.errors[0].message) || ""; }catch(e){}
+    return {ok:false, why:`erro ${r.status}${d ? ": "+d : ""}`};
+  }catch(e){ return {ok:false, why:"sem conexão com o servidor"}; }
 }
 
 if(!S.a) S = load();
